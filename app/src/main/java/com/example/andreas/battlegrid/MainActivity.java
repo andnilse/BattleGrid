@@ -20,5 +20,7 @@ public class MainActivity extends AppCompatActivity {
         list.add(player2);
 
         Game game = new Game(list);
+
+        //123123
     }
 }
