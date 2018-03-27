@@ -8,9 +8,9 @@ public class Object {
     private String name;
     private int health;
 
-    public Object(){
+    public Object(String name, int health){
         this.name = name;
-        setHealth(5);//ex 5 health
+        setHealth(health);//ex 5 health
         //set imageview or some sort of object graphics
     }
 

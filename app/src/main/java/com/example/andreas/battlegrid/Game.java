@@ -14,7 +14,7 @@ public class Game {
     public Game(ArrayList<Player> playerList){
         this.playerList = playerList;
         this.numPlayers = playerList.size();
-        //List should always be bigger than 2 players
+        //List should always be  2 players
         currentPlayer = playerList.get(0);
     }
     private void init(){
@@ -30,10 +30,10 @@ public class Game {
     }
     private void changePlayer(){
         int index = playerList.indexOf(currentPlayer);
-        if (index == playerList.size()-1){
+        if (index == 0){
             currentPlayer = playerList.get(0);
         }else{
-            currentPlayer = playerList.get(index + 1);
+            currentPlayer = playerList.get(1);
         }
     }
 }
