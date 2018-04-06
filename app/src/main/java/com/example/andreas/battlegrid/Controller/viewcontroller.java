@@ -85,10 +85,12 @@ public class viewcontroller extends AppCompatActivity {
     }
 
     public void build(View v){
+        // endre logic og view til drop list med flere alternativer etter hvert
 
     }
 
     public void shoot(View v){
+        // endre logic og view til drop list med flere alternativer etter hvert
 
     }
 
