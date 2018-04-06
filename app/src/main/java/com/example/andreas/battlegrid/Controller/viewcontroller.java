@@ -7,6 +7,8 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import com.example.andreas.battlegrid.Map;
+import com.example.andreas.battlegrid.Model.actions.weapons.Pistol;
+import com.example.andreas.battlegrid.Model.objects.Player;
 import com.example.andreas.battlegrid.R;
 
 public class viewcontroller extends AppCompatActivity {
@@ -81,7 +83,13 @@ public class viewcontroller extends AppCompatActivity {
     }
 
     public void move(View v){
-        Map.Action a = new Map.Action();
+        Pistol p = new Pistol();
+        Player player = new Player("test");
+
+        
+
+        Map map = new Map();
+        map.calculatePosibleTargets();
     }
 
     public void build(View v){

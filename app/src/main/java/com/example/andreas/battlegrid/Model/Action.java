@@ -1,5 +1,8 @@
 package com.example.andreas.battlegrid.Model;
 
+import com.example.andreas.battlegrid.Model.actions.Actions;
+import com.example.andreas.battlegrid.Model.objects.Player;
+
 import java.util.ArrayList;
 
 /**
@@ -18,14 +21,6 @@ public class Action {
         this.yPos = yPos;
         this.performedBy = originPlayer;
         this.objectClassName = action.getClass().getSimpleName(); //Class name
-        /*if (object instanceof Player){
-            this.name = "Moving";
-        }
-        if (object instanceof Weapon){
-            this.name = "Shooting";
-        }
-        if (object instanceof Wall){
-            this.name = "Building";
-        }*/
+
     }
 }
