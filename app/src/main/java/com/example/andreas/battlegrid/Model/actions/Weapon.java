@@ -1,5 +1,6 @@
 package com.example.andreas.battlegrid.Model.actions;
 
+import com.example.andreas.battlegrid.Model.actions.weapons.Gun;
 import com.example.andreas.battlegrid.Objects;
 
 /**
