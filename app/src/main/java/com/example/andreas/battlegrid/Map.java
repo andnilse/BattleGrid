@@ -1,6 +1,7 @@
 package com.example.andreas.battlegrid;
 
 import com.example.andreas.battlegrid.Model.Action;
+import com.example.andreas.battlegrid.Model.objects.Objects;
 import com.example.andreas.battlegrid.Model.objects.Player;
 
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class Map {
 
     ArrayList<ArrayList<Objects>> row;
 
-    public ArrayList<ArrayList<Objects>> getMap(){
+    public  ArrayList<ArrayList<Objects>> getMap(){
         return row;
     }
 
