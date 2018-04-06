@@ -44,9 +44,7 @@ public class Game {
         }
     }
 
-    private void makeMapList(){
-        for (int i = 0;i<10;i++){
+    private void getMap(){
 
-        }
     }
 }
