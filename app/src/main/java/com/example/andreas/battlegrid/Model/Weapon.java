@@ -19,10 +19,6 @@ public class Weapon extends Objects{
         }
     }
 
-    public void doDamage(int damage,Player player){
-        int remainingHealth = player.getHealth() - damage;
-        player.setHealth(remainingHealth);
-    }
     public void doDamage(int damage, Objects object){
         int remainingHealth = object.getHealth() - damage;
         object.setHealth(remainingHealth);
