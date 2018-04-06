@@ -6,4 +6,5 @@ package com.example.andreas.battlegrid.Model;
 
 public class Wall extends Objects{
 
+
 }
