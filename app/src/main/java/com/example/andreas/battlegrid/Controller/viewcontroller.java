@@ -7,7 +7,6 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import com.example.andreas.battlegrid.Map;
-import com.example.andreas.battlegrid.Model.Action;
 import com.example.andreas.battlegrid.R;
 
 public class viewcontroller extends AppCompatActivity {
@@ -82,7 +81,7 @@ public class viewcontroller extends AppCompatActivity {
     }
 
     public void move(View v){
-        Action a = new Action();
+        Map.Action a = new Map.Action();
     }
 
     public void build(View v){
