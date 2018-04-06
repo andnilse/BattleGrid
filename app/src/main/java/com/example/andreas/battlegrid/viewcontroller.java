@@ -7,12 +7,16 @@ import android.widget.LinearLayout;
 
 public class viewcontroller extends AppCompatActivity {
 
+    viewcontroller(Map map){
+        map = map;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.playerchoise);
 
-        LinearLayout map = (LinearLayout) findViewById(R.id.maplayout);
+        LinearLayout mapLay = (LinearLayout) findViewById(R.id.maplayout);
         LinearLayout.LayoutParams LLParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT);
 
         for (int i =0;i<10;i++){
@@ -22,13 +26,16 @@ public class viewcontroller extends AppCompatActivity {
 
             for (int j =0; j<10; j++){
                 ImageButton ib = new ImageButton(this);
-                ib.setBackgroundColor();
+                ib.setBackgroundColor(map.getObj(i,j).getcolor());
+                row.addView(ib);
             }
 
-            map.addView(row);
+            mapLay.addView(row);
         }
 
 
     }
+
+    Map map;
 
 }

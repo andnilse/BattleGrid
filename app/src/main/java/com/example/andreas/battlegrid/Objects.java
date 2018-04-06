@@ -14,7 +14,9 @@ public class Objects {
         //set imageview or some sort of object graphics
     }
 
-    public
+    public int getcolor(){
+        return 0;
+    }
     public String getName(){
         return this.name;
     }

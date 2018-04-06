@@ -14,11 +14,13 @@ public class Map {
             for (int j = 0; j<10; j++){
                 colmn.add(obj);
             }
+
+            row.add(colmn);
         }
 
     }
 
-    ArrayList<ArrayList> row;
+    ArrayList<ArrayList<Objects>> row = new ArrayList<ArrayList<Objects>>();
 
     public Objects getObj(int i, int j){
         return row.get(i).get(j);
