@@ -17,7 +17,8 @@ public class Action {
         this.xPos = xPos;
         this.yPos = yPos;
         this.performedBy = originPlayer;
-        if (object instanceof Player){
+        this.name = object.getClass().getSimpleName(); //Class name
+        /*if (object instanceof Player){
             this.name = "Moving";
         }
         if (object instanceof Weapon){
@@ -25,6 +26,6 @@ public class Action {
         }
         if (object instanceof Wall){
             this.name = "Building";
-        }
+        }*/
     }
 }
