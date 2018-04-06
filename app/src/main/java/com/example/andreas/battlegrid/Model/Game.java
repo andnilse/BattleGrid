@@ -47,5 +47,6 @@ public class Game {
     private void getMap(){
         Map map = new Map();
         gameMap = map.getMap();
+
     }
 }
