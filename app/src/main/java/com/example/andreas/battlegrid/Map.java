@@ -29,6 +29,7 @@ public class Map {
     }
 
     public ArrayList<ArrayList> calculatePosibleTargets(Action a){
+        return null;
 
     }
 }
