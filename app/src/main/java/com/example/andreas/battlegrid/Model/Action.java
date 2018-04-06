@@ -9,15 +9,15 @@ import java.util.ArrayList;
 public class Action {
     private String objectClassName;
     private Player performedBy;
-    private Objects object;
+    private Actions action;
     private int xPos, yPos;
 
-    public Action(Objects object,Player originPlayer, int xPos, int yPos){
-        this.object = object;
+    public Action(Actions action,Player originPlayer, int xPos, int yPos){
+        this.action = action;
         this.xPos = xPos;
         this.yPos = yPos;
         this.performedBy = originPlayer;
-        this.objectClassName = object.getClass().getSimpleName(); //Class name
+        this.objectClassName = action.getClass().getSimpleName(); //Class name
         /*if (object instanceof Player){
             this.name = "Moving";
         }
