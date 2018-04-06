@@ -10,10 +10,10 @@ import java.util.ArrayList;
  */
 
 public class Action {
-    private String objectClassName;
-    private Player performedBy;
-    private Actions action;
-    private int xPos, yPos;
+    public String objectClassName;
+    public Player performedBy;
+    public Actions action;
+    public int xPos, yPos;
 
     public Action(Actions action,Player originPlayer, int xPos, int yPos){
         this.action = action;
