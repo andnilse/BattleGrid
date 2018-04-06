@@ -7,18 +7,18 @@ import java.util.ArrayList;
  */
 
 public class Action {
-    private String name;
+    private String objectClassName;
     private Player performedBy;
     private Objects object;
     private int xPos, yPos;
-
 
     public Action(Objects object,Player originPlayer, int xPos, int yPos){
         this.object = object;
         this.xPos = xPos;
         this.yPos = yPos;
         this.performedBy = originPlayer;
-        if (object instanceof Player){
+        this.objectClassName = object.getClass().getSimpleName(); //Class name
+        /*if (object instanceof Player){
             this.name = "Moving";
         }
         if (object instanceof Weapon){
@@ -26,6 +26,6 @@ public class Action {
         }
         if (object instanceof Wall){
             this.name = "Building";
-        }
+        }*/
     }
 }

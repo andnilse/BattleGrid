@@ -10,6 +10,8 @@ public class Game {
     private int numPlayers;
     private ArrayList<Player> playerList;
     private Player currentPlayer;
+    private ArrayList<ArrayList<Objects>> outerList;
+    //private ArrayList<Objects> innerList;
 
     public Game(ArrayList<Player> playerList){
         this.playerList = playerList;
@@ -21,6 +23,8 @@ public class Game {
         //setup players
         //make the map
         //add additional items on the map/grid
+
+
     }
     private void run(){
         //turn-based multiplayer
@@ -34,6 +38,12 @@ public class Game {
             currentPlayer = playerList.get(0);
         }else{
             currentPlayer = playerList.get(1);
+        }
+    }
+
+    private void makeMapList(){
+        for (int i = 0;i<10;i++){
+
         }
     }
 }

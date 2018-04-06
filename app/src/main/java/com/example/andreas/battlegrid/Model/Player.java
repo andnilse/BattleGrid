@@ -12,6 +12,6 @@ public class Player extends Objects{
     private Image avatar;//Velges og settes somwhere
 
     public Player(String name){
-        setHealth(5);//ex 5 health;
+        setHealth(10);//ex 10 health;
     }
 }
