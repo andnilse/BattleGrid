@@ -4,7 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.andreas.battlegrid.Model.Game;
-import com.example.andreas.battlegrid.Model.Player;
+import com.example.andreas.battlegrid.Model.objects.Player;
 
 import java.util.ArrayList;
 

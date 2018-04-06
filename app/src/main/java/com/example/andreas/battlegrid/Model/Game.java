@@ -1,5 +1,8 @@
 package com.example.andreas.battlegrid.Model;
 
+import com.example.andreas.battlegrid.Model.objects.Objects;
+import com.example.andreas.battlegrid.Model.objects.Player;
+
 import java.util.ArrayList;
 
 /**
