@@ -6,10 +6,10 @@ import com.example.andreas.battlegrid.Objects;
  * Created by Andreas on 22.02.2018.
  */
 
-public class Weapon extends Objects{
+public class Weapon {
     private Weapon weapon;
     private String name;
-    private int health;
+    //private int health;
 
     public Weapon(){
 
