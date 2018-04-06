@@ -12,8 +12,8 @@ public class Weapon {
         int remainingHealth = player.getHealth() - damage;
         player.setHealth(remainingHealth);
     }
-    public void doDamage(int damage, Object object){
-        int remainingHealth = object.getHealth() - damage;
-        object.setHealth(remainingHealth);
+    public void doDamage(int damage, Objects objects){
+        int remainingHealth = objects.getHealth() - damage;
+        objects.setHealth(remainingHealth);
     }
 }
