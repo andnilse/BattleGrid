@@ -1,18 +1,24 @@
-package com.example.andreas.battlegrid;
+package com.example.andreas.battlegrid.Model;
 
 /**
  * Created by Andreas on 22.02.2018.
  */
 
-public class Player {
+public class Object{
+    //private position;
     private String name;
     private int health;
 
-    public Player(String name){
-        this.name = name;
-        setHealth(5);//ex 5 health
-        //set imageview or some sort of player graphics
+    public Object(){
+
     }
+
+    public Object(String name, int health){
+        this.name = name;
+        setHealth(health);//ex 5 health
+        //set imageview or some sort of object graphics
+    }
+
     public String getName(){
         return this.name;
     }
