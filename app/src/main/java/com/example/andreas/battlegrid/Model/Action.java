@@ -12,6 +12,7 @@ public class Action {
     private Objects object;
     private int xPos, yPos;
 
+
     public Action(Objects object,Player originPlayer, int xPos, int yPos){
         this.object = object;
         this.xPos = xPos;
