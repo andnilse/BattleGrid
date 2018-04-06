@@ -9,7 +9,10 @@ import com.example.andreas.battlegrid.Objects;
 public class Weapon {
     private Weapon weapon;
     private String name;
+<<<<<<< HEAD
+=======
     //private int health;
+>>>>>>> master
 
     public Weapon(){
 

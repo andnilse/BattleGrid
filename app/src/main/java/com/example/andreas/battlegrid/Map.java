@@ -1,10 +1,12 @@
 package com.example.andreas.battlegrid;
 
+import com.example.andreas.battlegrid.Model.Action;
+
 import java.util.ArrayList;
 
 public class Map {
 
-    Map(){
+    public Map(){
 
         Objects obj = new Objects();
 
@@ -20,9 +22,13 @@ public class Map {
 
     }
 
-    ArrayList<ArrayList<Objects>> row = new ArrayList<ArrayList<Objects>>();
+    ArrayList<ArrayList<Objects>> row;
 
     public Objects getObj(int i, int j){
         return row.get(i).get(j);
+    }
+
+    public ArrayList<ArrayList> calculatePosibleTargets(Action a){
+
     }
 }
