@@ -1,7 +1,7 @@
 package com.example.andreas.battlegrid.Model.actions;
 
 import com.example.andreas.battlegrid.Model.actions.weapons.Gun;
-import com.example.andreas.battlegrid.Objects;
+import com.example.andreas.battlegrid.Model.objects.Objects;
 
 /**
  * Created by Andreas on 22.02.2018.

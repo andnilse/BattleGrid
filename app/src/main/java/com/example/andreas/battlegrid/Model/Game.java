@@ -14,8 +14,7 @@ public class Game {
     private int numPlayers;
     private ArrayList<Player> playerList;
     private Player currentPlayer;
-    private ArrayList<ArrayList<Objects>> outerList;
-    //private ArrayList<Objects> innerList;
+    private ArrayList<ArrayList<Objects>> gameMap;
 
     public Game(ArrayList<Player> playerList){
         this.playerList = playerList;
@@ -47,5 +46,7 @@ public class Game {
 
     private void getMap(){
         Map map = new Map();
+        gameMap = map.getMap();
+
     }
 }
