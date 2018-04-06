@@ -1,4 +1,4 @@
-package com.example.andreas.battlegrid;
+package com.example.andreas.battlegrid.Model;
 
 import java.util.ArrayList;
 

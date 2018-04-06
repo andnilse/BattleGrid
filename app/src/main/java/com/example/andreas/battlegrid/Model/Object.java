@@ -1,12 +1,17 @@
-package com.example.andreas.battlegrid;
+package com.example.andreas.battlegrid.Model;
 
 /**
  * Created by Andreas on 22.02.2018.
  */
 
-public class Object {
+public class Object{
+    //private position;
     private String name;
     private int health;
+
+    public Object(){
+
+    }
 
     public Object(String name, int health){
         this.name = name;
