@@ -9,7 +9,8 @@ import java.util.ArrayList;
 public class Action {
     private Object object;
 
-    public Action(Object object){
+
+    public Action(Objects object,Player originPlayer, Player remotePlayer){
         if (object instanceof Player){
 
         }
