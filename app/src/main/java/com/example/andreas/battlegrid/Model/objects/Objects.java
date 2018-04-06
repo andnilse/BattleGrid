@@ -1,4 +1,4 @@
-package com.example.andreas.battlegrid.Model;
+package com.example.andreas.battlegrid.Model.objects;
 
 /**
  * Created by Andreas on 22.02.2018.
