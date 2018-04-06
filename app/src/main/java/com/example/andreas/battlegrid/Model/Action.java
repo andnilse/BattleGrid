@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 
 public class Action {
-    private String name;
+    private String objectClassName;
     private Player performedBy;
     private Objects object;
     private int xPos, yPos;
@@ -17,7 +17,7 @@ public class Action {
         this.xPos = xPos;
         this.yPos = yPos;
         this.performedBy = originPlayer;
-        this.name = object.getClass().getSimpleName(); //Class name
+        this.objectClassName = object.getClass().getSimpleName(); //Class name
         /*if (object instanceof Player){
             this.name = "Moving";
         }

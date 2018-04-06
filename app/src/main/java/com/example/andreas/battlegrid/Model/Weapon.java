@@ -4,10 +4,10 @@ package com.example.andreas.battlegrid.Model;
  * Created by Andreas on 22.02.2018.
  */
 
-public class Weapon extends Objects{
+public class Weapon {
     private Weapon weapon;
     private String name;
-    private int health;
+    //private int health;
 
     public Weapon(){
 
@@ -19,10 +19,6 @@ public class Weapon extends Objects{
         }
     }
 
-    public void doDamage(int damage,Player player){
-        int remainingHealth = player.getHealth() - damage;
-        player.setHealth(remainingHealth);
-    }
     public void doDamage(int damage, Objects object){
         int remainingHealth = object.getHealth() - damage;
         object.setHealth(remainingHealth);
