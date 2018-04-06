@@ -5,6 +5,8 @@ import com.example.andreas.battlegrid.Model.objects.Player;
 
 import java.util.ArrayList;
 
+import java.util.ArrayList;
+
 public class Map {
 
     public Map(){
@@ -24,6 +26,10 @@ public class Map {
     }
 
     ArrayList<ArrayList<Objects>> row;
+
+    public ArrayList<ArrayList<Objects>> getMap(){
+        return row;
+    }
 
     public Objects getObj(int i, int j){
         return row.get(i).get(j);
