@@ -4,7 +4,7 @@ package com.example.andreas.battlegrid.Model;
  * Created by Andreas on 22.02.2018.
  */
 
-public class Weapon extends Object{
+public class Weapon extends Objects{
     private Weapon weapon;
     private String name;
     private int health;
@@ -23,7 +23,7 @@ public class Weapon extends Object{
         int remainingHealth = player.getHealth() - damage;
         player.setHealth(remainingHealth);
     }
-    public void doDamage(int damage, Object object){
+    public void doDamage(int damage, Objects object){
         int remainingHealth = object.getHealth() - damage;
         object.setHealth(remainingHealth);
     }

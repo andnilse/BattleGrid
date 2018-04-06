@@ -6,7 +6,7 @@ import android.media.Image;
  * Created by Andreas on 22.02.2018.
  */
 
-public class Player extends Object{
+public class Player extends Objects{
     private String name;
     private int health;
     private Image avatar;//Velges og settes somwhere
