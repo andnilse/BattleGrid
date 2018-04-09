@@ -9,8 +9,6 @@ import com.example.andreas.battlegrid.Model.objects.Objects;
  */
 
 public class Player extends Objects {
-    private String name;
-    private int health;
     private Image avatar;//Velges og settes somwhere
 
     public Player(String name){

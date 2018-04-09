@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.ArrayList;
 
 public class Map {
+    private Map map;
 
     public Map(){
 
@@ -30,6 +31,10 @@ public class Map {
 
     public  ArrayList<ArrayList<Objects>> getMap(){
         return row;
+    }
+
+    public void setMap(ArrayList<ArrayList<Objects>> map){
+        row = map;
     }
 
     public Objects getObj(int i, int j){
