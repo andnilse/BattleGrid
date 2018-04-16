@@ -7,7 +7,7 @@ import com.example.andreas.battlegrid.Model.objects.Objects;
  * Created by Andreas on 22.02.2018.
  */
 
-public class Weapon extends Actions {
+public class Weapon extends Actions{
     private Weapon weapon;
     private String name;
 

@@ -13,5 +13,6 @@ public class Player extends Objects {
 
     public Player(String name){
         setHealth(10);//ex 10 health;
+        this.setName(name);
     }
 }
