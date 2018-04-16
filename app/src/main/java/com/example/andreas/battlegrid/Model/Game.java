@@ -5,6 +5,7 @@ import com.example.andreas.battlegrid.Model.actions.Actions;
 import com.example.andreas.battlegrid.Model.actions.PlayerMovment;
 import com.example.andreas.battlegrid.Model.actions.Weapon;
 import com.example.andreas.battlegrid.Model.actions.weapons.Gun;
+import com.example.andreas.battlegrid.Model.actions.weapons.Trap;
 import com.example.andreas.battlegrid.Model.objects.Objects;
 import com.example.andreas.battlegrid.Model.objects.Player;
 
@@ -58,9 +59,19 @@ public class Game {
                     int nextTargetY = action.getTargetY();
 
                     if (action instanceof PlayerMovment){
-                        gameMap.remove(currentPlayer);
-                        gameMap.get(nextTargetX).add(nextTargetY, currentPlayer);
-                        //IS this added correctly to map location? OR is it opposite?
+                        if (!(gameMap.get(nextTargetX).get(nextTargetY) instanceof Objects)){
+                            // If the target position does not contain an object (other player or wall)
+                            gameMap.remove(currentPlayer);
+                            gameMap.get(nextTargetX).add(nextTargetY, currentPlayer);
+                            //IS this added correctly to map location? OR is it opposite?
+
+                            //If statement for stepping on a trap
+                            if (gameMap.get(nextTargetX).get(nextTargetY) instanceof Trap){
+                                Trap trap = (Trap) gameMap.get(nextTargetX).get(nextTargetY);
+                                currentPlayer.setHealth(currentPlayer.getHealth()-trap.damage);
+                            }
+                        }
+                        //Else dont move and write to log??
 
                     }if (action instanceof Weapon){
                         if (action instanceof Gun){

@@ -9,6 +9,4 @@ public class Wall extends Objects {
     public Wall(){
         setHealth(1);
     }
-
-
 }
