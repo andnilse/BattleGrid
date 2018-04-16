@@ -64,15 +64,16 @@ public class Game {
                             gameMap.remove(currentPlayer);
                             gameMap.get(nextTargetX).add(nextTargetY, currentPlayer);
                             //IS this added correctly to map location? OR is it opposite?
-
+                        }if (gameMap.get(nextTargetX).get(nextTargetY) instanceof Trap){
                             //If statement for stepping on a trap
-                            if (gameMap.get(nextTargetX).get(nextTargetY) instanceof Trap){
-                                Trap trap = (Trap) gameMap.get(nextTargetX).get(nextTargetY);
-                                currentPlayer.setHealth(currentPlayer.getHealth()-trap.damage);
-                            }
+                            Trap trap = (Trap) gameMap.get(nextTargetX).get(nextTargetY);
+                            currentPlayer.setHealth(currentPlayer.getHealth()-trap.damage);
+                            //Now remove the trap and move player
+                            gameMap.remove(trap);
+                            gameMap.remove(currentPlayer);
+                            gameMap.get(nextTargetX).set(nextTargetY, currentPlayer);
                         }
                         //Else dont move and write to log??
-
                     }if (action instanceof Weapon){
                         if (action instanceof Gun){
                             if (gameMap.get(nextTargetX).get(nextTargetY) instanceof Objects){
