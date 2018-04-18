@@ -35,7 +35,7 @@ public class Map {
 
         if (a.action instanceof Weapon){ // behover ikke ta hensyn til objekter på kartet
 
-            
+
 
         } else { // må ta ensyn til obj på kartet, kan ikke bygge vegg oppå vegg, kan ikke gå på vegg
 
