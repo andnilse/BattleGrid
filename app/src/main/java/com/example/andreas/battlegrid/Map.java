@@ -1,13 +1,20 @@
 package com.example.andreas.battlegrid;
 
 import com.example.andreas.battlegrid.Model.Action;
+<<<<<<< HEAD
 import com.example.andreas.battlegrid.Model.actions.PlayerMovment;
 import com.example.andreas.battlegrid.Model.actions.Weapon;
+=======
+import com.example.andreas.battlegrid.Model.objects.Objects;
+>>>>>>> master
 import com.example.andreas.battlegrid.Model.objects.Player;
 
 import java.util.ArrayList;
 
+import java.util.ArrayList;
+
 public class Map {
+    private Map map;
 
     public Map(){
 
@@ -26,6 +33,14 @@ public class Map {
     }
 
     ArrayList<ArrayList<Objects>> row;
+
+    public  ArrayList<ArrayList<Objects>> getMap(){
+        return row;
+    }
+
+    public void setMap(ArrayList<ArrayList<Objects>> map){
+        row = map;
+    }
 
     public Objects getObj(int i, int j){
         return row.get(i).get(j);

@@ -6,5 +6,7 @@ package com.example.andreas.battlegrid.Model.objects;
 
 public class Wall extends Objects {
 
-
+    public Wall(){
+        setHealth(1);
+    }
 }
