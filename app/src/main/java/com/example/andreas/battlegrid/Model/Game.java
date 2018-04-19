@@ -65,7 +65,7 @@ public class Game {
                     int nextTargetY = action.getTargetY();
 
                     if (action instanceof PlayerMovment){
-                        if (!(gameMap.get(nextTargetX).get(nextTargetY) instanceof Objects)){
+                        if (((PlayerMovment) action).CalculateAllowedTargets(nextTargetX, nextTargetY, gameMap)){
                             // If the target position does not contain an object (other player or wall)
                             gameMap.remove(currentPlayer);
                             gameMap.get(nextTargetX).add(nextTargetY, currentPlayer);
@@ -82,7 +82,7 @@ public class Game {
                         //Else dont move and write to log??
                     }if (action instanceof Weapon){
                         if (action instanceof Gun){
-                            if (gameMap.get(nextTargetX).get(nextTargetY) instanceof Objects){
+                            if (((Gun) action).CalculateAllowedTargets(nextTargetX, nextTargetY, gameMap, currentPlayer)){
                                 Objects object = gameMap.get(nextTargetX).get(nextTargetY);
                                 //Right now the gun takes 1 damage
                                 object.setHealth(object.getHealth()-1);
@@ -93,7 +93,9 @@ public class Game {
                         }
 
                     }if (action instanceof BuildWall){
-                        gameMap.get(nextTargetX).set(nextTargetY, new Wall());
+                        if (((BuildWall) action).CalculateAllowedTargets(nextTargetX,nextTargetY, gameMap)){
+                            gameMap.get(nextTargetX).set(nextTargetY, new Wall());
+                        }
                     }
                     updateMapView(gameMap);
 
