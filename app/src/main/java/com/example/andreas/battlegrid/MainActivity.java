@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.andreas.battlegrid.Controller.ViewController;
 import com.example.andreas.battlegrid.Model.Game;
 import com.example.andreas.battlegrid.Model.objects.Player;
 
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         list.add(player2);
 
         Game game = new Game(list);
-        startActivity(new Intent(MainActivity.this, viewcontroller.class));
+        startActivity(new Intent(MainActivity.this, ViewController.class));
 
         //123123
     }

@@ -28,7 +28,7 @@ public class Game {
     private ArrayList<ArrayList<Actions>> actionList;
     private Player winner;
 
-    private viewcontroller vc;
+    private ViewController vc;
     private ArrayList<ArrayList<ArrayList<Objects>>> gameMaps;
 
 
