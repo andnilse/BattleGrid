@@ -24,8 +24,8 @@ import java.util.ArrayList;
 
 public class ViewController extends AppCompatActivity {
 
-    public ViewController(ArrayList<ArrayList<Objects>> map, ArrayList<Player> p, int nrActions, Game g){
-        map = map;
+    public void getStuff(ArrayList<ArrayList<Objects>> mapp, ArrayList<Player> p, int nrActions, Game g){
+        map = mapp;
         players = p;
         actionsPerTurn = nrActions;
         game = g;
@@ -106,8 +106,8 @@ public class ViewController extends AppCompatActivity {
 
     ArrayList<ImageButton> gridButtons = new ArrayList<>();
 
-    Game game;
-    Map map;
+    Game game = new Game();
+    Map map = new Map();
     ArrayList<Player> players;
     int actionsPerTurn = 5;
 
