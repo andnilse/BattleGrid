@@ -19,7 +19,7 @@ public class Map {
             ArrayList<Objects> colmn = new ArrayList<Objects>();
 
             for (int j = 0; j<10; j++){
-                colmn.add(obj);
+                colmn.add(null);
             }
 
             row.add(colmn);
@@ -27,7 +27,7 @@ public class Map {
 
     }
 
-    ArrayList<ArrayList<Objects>> row;
+    ArrayList<ArrayList<Objects>> row = new ArrayList<ArrayList<Objects>>();
 
     public  ArrayList<ArrayList<Objects>> getMap(){
         return row;

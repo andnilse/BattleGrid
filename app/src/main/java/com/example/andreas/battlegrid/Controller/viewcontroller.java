@@ -214,7 +214,7 @@ public class ViewController extends AppCompatActivity {
 
     }
 
-    public void receaveMap (Map newMap){
+    public void receaveMaps (ArrayList<ArrayList<ArrayList<Objects>>> newMap){
 
     }
 

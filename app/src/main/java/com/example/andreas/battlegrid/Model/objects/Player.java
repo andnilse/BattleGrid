@@ -5,9 +5,9 @@ package com.example.andreas.battlegrid.Model.objects;
  */
 
 public class Player extends Objects {
-    private String color;
+    private int color;
 
-    public Player(String name, String color){
+    public Player(String name, int color){
         setHealth(10);//ex 10 health;
         this.setName(name);
         this.color=color;

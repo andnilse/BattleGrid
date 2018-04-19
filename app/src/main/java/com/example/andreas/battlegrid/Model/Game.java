@@ -27,7 +27,10 @@ public class Game {
     private ArrayList<ArrayList<Objects>> gameMap;
     private ArrayList<ArrayList<Actions>> actionList;
     private Player winner;
-    private ViewController vc;
+
+    private viewcontroller vc;
+    private ArrayList<ArrayList<ArrayList<Objects>>> gameMaps;
+
 
     public Game(ArrayList<Player> playerList){
         if (playerList.size()>=2){
@@ -46,18 +49,25 @@ public class Game {
         getInitMap();
         vc = new ViewController(gameMap, playerList, 5, this);
         //add additional items on the map/grid
+        run();
     }
 
     public void setActionList(ArrayList<ArrayList<Actions>> actionList){
         this.actionList = actionList;
     }
-    private void run(){
+    public void run(){
         //turn-based multiplayer
         //each player gives 5 actions to be performed. The actions are done in a round-robin order.
         //Player1action1, player2 action1, player1 action2, player2 action2
         //This is done for every player in the list
         while (!finished){
-
+            while(actionList==null){
+                try{
+                    Thread.sleep(500);
+                }catch(InterruptedException e){
+                    e.printStackTrace();
+                }
+            }
             for (int index1 = 0;index1<5;index1++){
                 //For every of the 10 actions
                 for (int index2 = 0;index2<actionList.size();index2++){
@@ -109,13 +119,16 @@ public class Game {
                         }
                     }
                     updateMapView(gameMap);
+                    gameMaps.add(gameMap);
 
                     if (currentPlayer.getHealth()<=0){
-                        finished = true;
                         if (currentPlayer == playerList.get(0)){
                             winner = playerList.get(1);
+                        }else{
+                            winner = playerList.get(1);
                         }
-                        winner = playerList.get(1);
+                        vc.receavWinner(winner);
+                        finished = true;
                     }
 
                 }
@@ -125,18 +138,18 @@ public class Game {
     }
     private void changePlayer(){
         int index = playerList.indexOf(currentPlayer);
-        /*if (index == 0){
+        if (index == 0){
             currentPlayer = playerList.get(0);
         }else{
             currentPlayer = playerList.get(1);
-        }*/
+        }
         //Ready for multiple players. More than 2 with below code
 
-        if (index == playerList.size()-1){
+        /*if (index == playerList.size()-1){
             currentPlayer = playerList.get(0);
         }else{
             currentPlayer = playerList.get(index+1);
-        }
+        }*/
     }
 
     private void updateMapView(ArrayList<ArrayList<Objects>> gameMap){
