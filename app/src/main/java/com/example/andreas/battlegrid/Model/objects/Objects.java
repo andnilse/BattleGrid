@@ -5,7 +5,7 @@ package com.example.andreas.battlegrid.Model.objects;
  */
 
 public class Objects{
-    //private position;
+    private int x,y;
     private String name;
     private int health;
 
@@ -17,6 +17,20 @@ public class Objects{
         this.name = name;
         setHealth(health);//ex 5 health
         //set imageview or some sort of object graphics
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public int getX() {
+        return x;
+    }
+    public int getY() {
+        return y;
     }
 
     public String getName(){
