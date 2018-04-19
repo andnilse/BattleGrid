@@ -1,5 +1,6 @@
 package com.example.andreas.battlegrid.Model;
 
+import com.example.andreas.battlegrid.Controller.viewcontroller;
 import com.example.andreas.battlegrid.Map;
 import com.example.andreas.battlegrid.Model.actions.Actions;
 import com.example.andreas.battlegrid.Model.actions.BuildWall;
@@ -41,6 +42,7 @@ public class Game {
         currentPlayer = playerList.get(0);
         //make the map
         getInitMap();
+        viewcontroller vc = new viewcontroller(gameMap, playerList, 5, this);
         //add additional items on the map/grid
     }
 
@@ -65,10 +67,12 @@ public class Game {
                     int nextTargetY = action.getTargetY();
 
                     if (action instanceof PlayerMovment){
-                        if (((PlayerMovment) action).CalculateAllowedTargets(nextTargetX, nextTargetY, gameMap)){
+                        if (((PlayerMovment) action).CalculateAllowedTargets(nextTargetX, nextTargetY, gameMap, currentPlayer)){
                             // If the target position does not contain an object (other player or wall)
                             gameMap.remove(currentPlayer);
                             gameMap.get(nextTargetX).add(nextTargetY, currentPlayer);
+                            currentPlayer.setX(nextTargetX);
+                            currentPlayer.setY(nextTargetY);
                             //IS this added correctly to map location? OR is it opposite?
                         }if (gameMap.get(nextTargetX).get(nextTargetY) instanceof Trap){
                             //If statement for stepping on a trap
@@ -78,6 +82,8 @@ public class Game {
                             gameMap.remove(trap);
                             gameMap.remove(currentPlayer);
                             gameMap.get(nextTargetX).set(nextTargetY, currentPlayer);
+                            currentPlayer.setX(nextTargetX);
+                            currentPlayer.setY(nextTargetY);
                         }
                         //Else dont move and write to log??
                     }if (action instanceof Weapon){
@@ -93,8 +99,11 @@ public class Game {
                         }
 
                     }if (action instanceof BuildWall){
-                        if (((BuildWall) action).CalculateAllowedTargets(nextTargetX,nextTargetY, gameMap)){
-                            gameMap.get(nextTargetX).set(nextTargetY, new Wall());
+                        if (((BuildWall) action).CalculateAllowedTargets(nextTargetX,nextTargetY, gameMap, currentPlayer)){
+                            Wall wall = new Wall();
+                            gameMap.get(nextTargetX).set(nextTargetY, wall);
+                            wall.setX(nextTargetX);
+                            wall.setY(nextTargetY);
                         }
                     }
                     updateMapView(gameMap);
