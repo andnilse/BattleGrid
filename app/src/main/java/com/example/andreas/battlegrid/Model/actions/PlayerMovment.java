@@ -13,7 +13,7 @@ public class PlayerMovment extends Actions {
         int y = player.getY();
         if (gameMap.get(x).get(y) == null){
             if (x!=nextX && y!=nextY){
-                if (){
+                if (nextX-1==x && (nextY == y)){
                     return true;
                 }
             }
