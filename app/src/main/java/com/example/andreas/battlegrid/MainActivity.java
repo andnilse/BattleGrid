@@ -26,7 +26,10 @@ public class MainActivity extends AppCompatActivity {
 
         Game game = new Game(list);
         Intent intent = new Intent(getBaseContext(), ViewController.class);
-        intent.putExtra("EXTRA_SESSION_ID", game);
+        intent.putExtra("GameMap", game.gameMap);
+        intent.putExtra("PlayerList", game.playerList);
+        intent.putExtra("Number", 5);
+        intent.putExtra("Game", game);
         startActivity(intent);
 
         //123123

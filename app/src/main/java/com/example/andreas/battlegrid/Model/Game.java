@@ -27,9 +27,9 @@ public class Game implements Serializable{
     private Map map;
     private boolean finished;
     private int numPlayers;
-    private ArrayList<Player> playerList;
+    public ArrayList<Player> playerList;
     private Player currentPlayer;
-    private ArrayList<ArrayList<Objects>> gameMap;
+    public ArrayList<ArrayList<Objects>> gameMap;
     private ArrayList<ArrayList<Actions>> actionList;
     private Player winner;
 
