@@ -1,5 +1,7 @@
 package com.example.andreas.battlegrid.Model.objects;
 
+import android.graphics.Color;
+
 /**
  * Created by Andreas on 22.02.2018.
  */
@@ -45,4 +47,5 @@ public class Objects{
     public void setHealth(int health){
         this.health = health;
     }
+    public int getColor(){return Color.LTGRAY;}
 }

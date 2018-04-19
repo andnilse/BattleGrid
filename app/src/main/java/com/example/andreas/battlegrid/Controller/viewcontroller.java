@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -45,7 +46,7 @@ public class viewcontroller extends AppCompatActivity {
             for (int j =0; j<10; j++){
                 ImageButton ib = new ImageButton(this);
                 if (map.getObj(i,j) != null){
-                    ib.setBackgroundColor(map.getObj(i,j).getcolor()); // change to get image later
+                    ib.setBackgroundColor(map.getObj(i,j).getColor()); // change to get image later
                 } else {
                     ib.setBackgroundColor(Color.LTGRAY);
                 }
@@ -102,7 +103,7 @@ public class viewcontroller extends AppCompatActivity {
 
     int curentPlayer = 0;
     int numberOfCurentInputs = 0;
-    ArrayList<ArrayList> plActions = new ArrayList<ArrayList>();
+    ArrayList<ArrayList<Actions>> plActions = new ArrayList<ArrayList<Actions>>();
     Actions curentAction = new Pistol();
 
 
@@ -125,8 +126,10 @@ public class viewcontroller extends AppCompatActivity {
 
         if (numberOfCurentInputs >= actionsPerTurn){
             curentPlayer++;
+            EditText text = (EditText) findViewById(R.id.editText);
+            text.setText("Input from player" + (curentPlayer +1));
             if (curentPlayer >= players.size()){
-
+                game.setActionList(plActions);
             }
         }
 
@@ -159,14 +162,12 @@ public class viewcontroller extends AppCompatActivity {
 
     }
 
-    /*public void EnDisGridbuttons(boolean[][] alowedButtons){
-        for (int i = 0; i<gridButtons.size(); i++){
-            if (alowedButtons[(int) gridButtons.get(i).getTag(0)][(int) gridButtons.get(i).getTag(1)]){
-                gridButtons.get(i).setEnabled(true);
-            } else {
-                gridButtons.get(i).setEnabled(false);
-            }
-        }
-    }*/
+    public void receaveMap (Map newMap){
+
+    }
+
+    public void receavWinner(Player winner){
+
+    }
 
 }

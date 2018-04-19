@@ -1,9 +1,5 @@
 package com.example.andreas.battlegrid.Model.objects;
 
-import android.media.Image;
-
-import com.example.andreas.battlegrid.Model.objects.Objects;
-
 /**
  * Created by Andreas on 22.02.2018.
  */
@@ -16,7 +12,7 @@ public class Player extends Objects {
         this.setName(name);
         this.color=color;
     }
-    public String getColor(){
+    public int getColor(){
         return this.color;
     }
 }
