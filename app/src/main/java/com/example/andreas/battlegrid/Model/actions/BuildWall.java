@@ -8,7 +8,13 @@ import java.util.ArrayList;
 public class BuildWall extends Actions{
     public boolean CalculateAllowedTargets(int x, int y, ArrayList<ArrayList<Objects>> gameMap, Player player){
         if (gameMap.get(x).get(y) == null){
-            return true;
+            if (x!=nextX && y!=nextY){
+                if ((nextX-1==x || (nextX+1 ==x)) && (nextY == y-1 || nextY ==y || nextY ==y+1)){
+                    if ((nextX == x) && (nextY == y+1 || nextY == y-1)){
+                        return true;
+                    }
+                }
+            }
         }
         return false;
     }
