@@ -24,13 +24,6 @@ import java.util.ArrayList;
 
 public class ViewController extends AppCompatActivity {
 
-    public void getStuff(ArrayList<ArrayList<Objects>> mapp, ArrayList<Player> p, int nrActions, Game g){
-        map = mapp;
-        players = p;
-        actionsPerTurn = nrActions;
-        game = g;
-    }
-
     /*
     TODO
     oppdatere kart når spilere legger til movments
@@ -39,6 +32,17 @@ public class ViewController extends AppCompatActivity {
     legge til for build og move
 
      */
+    ArrayList<ImageButton> gridButtons = new ArrayList<>();
+
+    Game game = null;
+    Map map = null;
+    ArrayList<Player> players;
+    int actionsPerTurn = 5;
+
+    int curentPlayer = 0;
+    int numberOfCurentInputs = 0;
+    ArrayList<ArrayList<Actions>> plActions = new ArrayList<ArrayList<Actions>>();
+    Actions curentAction = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,18 +107,6 @@ public class ViewController extends AppCompatActivity {
 
 
     }
-
-    ArrayList<ImageButton> gridButtons = new ArrayList<>();
-
-    Game game = new Game();
-    Map map = new Map();
-    ArrayList<Player> players;
-    int actionsPerTurn = 5;
-
-    int curentPlayer = 0;
-    int numberOfCurentInputs = 0;
-    ArrayList<ArrayList<Actions>> plActions = new ArrayList<ArrayList<Actions>>();
-    Actions curentAction = new Pistol();
 
 
     public void MapButtonClick(View v){
