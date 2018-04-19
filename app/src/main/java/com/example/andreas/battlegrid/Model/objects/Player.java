@@ -9,10 +9,14 @@ import com.example.andreas.battlegrid.Model.objects.Objects;
  */
 
 public class Player extends Objects {
-    private Image avatar;//Velges og settes somwhere
+    private String color;
 
-    public Player(String name){
+    public Player(String name, String color){
         setHealth(10);//ex 10 health;
         this.setName(name);
+        this.color=color;
+    }
+    public String getColor(){
+        return this.color;
     }
 }

@@ -2,12 +2,14 @@ package com.example.andreas.battlegrid.Model;
 
 import com.example.andreas.battlegrid.Map;
 import com.example.andreas.battlegrid.Model.actions.Actions;
+import com.example.andreas.battlegrid.Model.actions.BuildWall;
 import com.example.andreas.battlegrid.Model.actions.PlayerMovment;
 import com.example.andreas.battlegrid.Model.actions.Weapon;
 import com.example.andreas.battlegrid.Model.actions.weapons.Gun;
 import com.example.andreas.battlegrid.Model.actions.weapons.Trap;
 import com.example.andreas.battlegrid.Model.objects.Objects;
 import com.example.andreas.battlegrid.Model.objects.Player;
+import com.example.andreas.battlegrid.Model.objects.Wall;
 
 import java.util.ArrayList;
 
@@ -40,6 +42,10 @@ public class Game {
         //make the map
         getInitMap();
         //add additional items on the map/grid
+    }
+
+    public void setActionList(ArrayList<ArrayList<Actions>> actionList){
+        this.actionList = actionList;
     }
     private void run(){
         //turn-based multiplayer
@@ -86,6 +92,8 @@ public class Game {
                             }
                         }
 
+                    }if (action instanceof BuildWall){
+                        gameMap.get(nextTargetX).set(nextTargetY, new Wall());
                     }
                     updateMapView(gameMap);
 

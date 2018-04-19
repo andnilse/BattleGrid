@@ -16,8 +16,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Player player1 = new Player("Alice");
-        Player player2 = new Player("Bob");
+        Player player1 = new Player("Alice", "red");
+        Player player2 = new Player("Bob", "blue");
         list.add(player1);
         list.add(player2);
 
