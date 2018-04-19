@@ -12,6 +12,8 @@ import android.widget.Toast;
 import com.example.andreas.battlegrid.Map;
 import com.example.andreas.battlegrid.Model.Game;
 import com.example.andreas.battlegrid.Model.actions.Actions;
+import com.example.andreas.battlegrid.Model.actions.BuildWall;
+import com.example.andreas.battlegrid.Model.actions.PlayerMovment;
 import com.example.andreas.battlegrid.Model.actions.Weapon;
 import com.example.andreas.battlegrid.Model.actions.weapons.Pistol;
 import com.example.andreas.battlegrid.Model.objects.Objects;
@@ -146,26 +148,68 @@ public class viewcontroller extends AppCompatActivity {
 
     boolean moveActive = false;
     public void move(View v){
+        ImageButton build = (ImageButton) findViewById(R.id.ibBuild);
+        ImageButton shoot = (ImageButton) findViewById(R.id.ibWeapon);
+        if (!moveActive){
 
+            build.setEnabled(false);
+            shoot.setEnabled(false);
+
+            moveActive = true;
+            curentAction = new PlayerMovment();
+        } else {
+
+            build.setEnabled(true);
+            shoot.setEnabled(true);
+
+            moveActive = false;
+            curentAction = null;
+        }
 
     }
 
     boolean buildActive = false;
     public void build(View v){
-        // endre logic og view til drop list med flere alternativer etter hvert
+        ImageButton move = (ImageButton) findViewById(R.id.ibMovment);
+        ImageButton shoot = (ImageButton) findViewById(R.id.ibWeapon);
+        if (!buildActive){
+
+            move.setEnabled(false);
+            shoot.setEnabled(false);
+
+            buildActive = true;
+            curentAction = new BuildWall();
+        } else {
+
+            move.setEnabled(true);
+            shoot.setEnabled(true);
+
+            buildActive = false;
+            curentAction = null;
+        }
 
     }
 
     boolean weaponActive = false;
     Weapon weapon = new Pistol();
     public void shoot(View v){
+
+        ImageButton move = (ImageButton) findViewById(R.id.ibMovment);
+        ImageButton build = (ImageButton) findViewById(R.id.ibBuild);
         if (!weaponActive){
-            ImageButton move = (ImageButton) findViewById(R.id.ibMovment);
+
             move.setEnabled(false);
-            ImageButton build = (ImageButton) findViewById(R.id.ibBuild);
             build.setEnabled(false);
 
+            weaponActive = true;
+            curentAction = weapon;
+        } else {
 
+            move.setEnabled(true);
+            build.setEnabled(true);
+
+            weaponActive = false;
+            curentAction = null;
         }
 
     }
