@@ -5,8 +5,10 @@ package com.example.andreas.battlegrid.Model.objects;
  */
 
 public class Wall extends Objects {
+    private String color = "gray";
 
     public Wall(){
         setHealth(1);
+        this.color = color;
     }
 }

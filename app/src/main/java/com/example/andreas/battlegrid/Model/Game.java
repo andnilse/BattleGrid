@@ -2,12 +2,14 @@ package com.example.andreas.battlegrid.Model;
 
 import com.example.andreas.battlegrid.Map;
 import com.example.andreas.battlegrid.Model.actions.Actions;
+import com.example.andreas.battlegrid.Model.actions.BuildWall;
 import com.example.andreas.battlegrid.Model.actions.PlayerMovment;
 import com.example.andreas.battlegrid.Model.actions.Weapon;
 import com.example.andreas.battlegrid.Model.actions.weapons.Gun;
 import com.example.andreas.battlegrid.Model.actions.weapons.Trap;
 import com.example.andreas.battlegrid.Model.objects.Objects;
 import com.example.andreas.battlegrid.Model.objects.Player;
+import com.example.andreas.battlegrid.Model.objects.Wall;
 
 import java.util.ArrayList;
 
@@ -41,6 +43,10 @@ public class Game {
         getInitMap();
         //add additional items on the map/grid
     }
+
+    public void setActionList(ArrayList<ArrayList<Actions>> actionList){
+        this.actionList = actionList;
+    }
     private void run(){
         //turn-based multiplayer
         //each player gives 5 actions to be performed. The actions are done in a round-robin order.
@@ -59,7 +65,7 @@ public class Game {
                     int nextTargetY = action.getTargetY();
 
                     if (action instanceof PlayerMovment){
-                        if (!(gameMap.get(nextTargetX).get(nextTargetY) instanceof Objects)){
+                        if (((PlayerMovment) action).CalculateAllowedTargets(nextTargetX, nextTargetY, gameMap)){
                             // If the target position does not contain an object (other player or wall)
                             gameMap.remove(currentPlayer);
                             gameMap.get(nextTargetX).add(nextTargetY, currentPlayer);
@@ -76,7 +82,7 @@ public class Game {
                         //Else dont move and write to log??
                     }if (action instanceof Weapon){
                         if (action instanceof Gun){
-                            if (gameMap.get(nextTargetX).get(nextTargetY) instanceof Objects){
+                            if (((Gun) action).CalculateAllowedTargets(nextTargetX, nextTargetY, gameMap, currentPlayer)){
                                 Objects object = gameMap.get(nextTargetX).get(nextTargetY);
                                 //Right now the gun takes 1 damage
                                 object.setHealth(object.getHealth()-1);
@@ -86,6 +92,10 @@ public class Game {
                             }
                         }
 
+                    }if (action instanceof BuildWall){
+                        if (((BuildWall) action).CalculateAllowedTargets(nextTargetX,nextTargetY, gameMap)){
+                            gameMap.get(nextTargetX).set(nextTargetY, new Wall());
+                        }
                     }
                     updateMapView(gameMap);
 

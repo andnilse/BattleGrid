@@ -2,6 +2,9 @@ package com.example.andreas.battlegrid.Model.actions;
 
 import com.example.andreas.battlegrid.Model.actions.weapons.Gun;
 import com.example.andreas.battlegrid.Model.objects.Objects;
+import com.example.andreas.battlegrid.Model.objects.Player;
+
+import java.util.ArrayList;
 
 /**
  * Created by Andreas on 22.02.2018.
