@@ -1,6 +1,6 @@
 package com.example.andreas.battlegrid.Model;
 
-import com.example.andreas.battlegrid.Controller.viewcontroller;
+import com.example.andreas.battlegrid.Controller.ViewController;
 import com.example.andreas.battlegrid.Map;
 import com.example.andreas.battlegrid.Model.actions.Actions;
 import com.example.andreas.battlegrid.Model.actions.BuildWall;
@@ -27,8 +27,10 @@ public class Game {
     private ArrayList<ArrayList<Objects>> gameMap;
     private ArrayList<ArrayList<Actions>> actionList;
     private Player winner;
+
     private viewcontroller vc;
     private ArrayList<ArrayList<ArrayList<Objects>>> gameMaps;
+
 
     public Game(ArrayList<Player> playerList){
         if (playerList.size()>=2){
@@ -45,7 +47,7 @@ public class Game {
         currentPlayer = playerList.get(0);
         //make the map
         getInitMap();
-        vc = new viewcontroller(gameMap, playerList, 5, this);
+        vc = new ViewController(gameMap, playerList, 5, this);
         //add additional items on the map/grid
         run();
     }

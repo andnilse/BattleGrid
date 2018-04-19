@@ -22,9 +22,9 @@ import com.example.andreas.battlegrid.R;
 
 import java.util.ArrayList;
 
-public class viewcontroller extends AppCompatActivity {
+public class ViewController extends AppCompatActivity {
 
-    public viewcontroller(ArrayList<ArrayList<Objects>> map, ArrayList<Player> p, int nrActions, Game g){
+    public ViewController(ArrayList<ArrayList<Objects>> map, ArrayList<Player> p, int nrActions, Game g){
         map = map;
         players = p;
         actionsPerTurn = nrActions;
