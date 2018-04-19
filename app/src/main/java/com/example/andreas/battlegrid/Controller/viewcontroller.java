@@ -32,6 +32,17 @@ public class ViewController extends AppCompatActivity {
     legge til for build og move
 
      */
+    ArrayList<ImageButton> gridButtons = new ArrayList<>();
+
+    Game game = null;
+    Map map = null;
+    ArrayList<Player> players;
+    int actionsPerTurn = 5;
+
+    int curentPlayer = 0;
+    int numberOfCurentInputs = 0;
+    ArrayList<ArrayList<Actions>> plActions = new ArrayList<ArrayList<Actions>>();
+    Actions curentAction = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +113,7 @@ public class ViewController extends AppCompatActivity {
 
     }
 
+<<<<<<< HEAD:app/src/main/java/com/example/andreas/battlegrid/Controller/viewcontroller.java
     ArrayList<ImageButton> gridButtons = new ArrayList<>();
 
     Game game;
@@ -114,6 +126,8 @@ public class ViewController extends AppCompatActivity {
     ArrayList<ArrayList<Actions>> plActions = new ArrayList<ArrayList<Actions>>();
     Actions curentAction = new Pistol();
 
+=======
+>>>>>>> master:app/src/main/java/com/example/andreas/battlegrid/Controller/ViewController.java
 
     public void MapButtonClick(View v){
         if (!(moveActive || buildActive || weaponActive)){

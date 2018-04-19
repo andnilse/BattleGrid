@@ -1,5 +1,9 @@
 package com.example.andreas.battlegrid.Model;
 
+import android.annotation.SuppressLint;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.example.andreas.battlegrid.Controller.ViewController;
 import com.example.andreas.battlegrid.Map;
 import com.example.andreas.battlegrid.Model.actions.Actions;
@@ -12,19 +16,20 @@ import com.example.andreas.battlegrid.Model.objects.Objects;
 import com.example.andreas.battlegrid.Model.objects.Player;
 import com.example.andreas.battlegrid.Model.objects.Wall;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by Andreas on 22.02.2018.
  */
 
-public class Game {
+public class Game implements Serializable{
     private Map map;
     private boolean finished;
     private int numPlayers;
-    private ArrayList<Player> playerList;
+    public ArrayList<Player> playerList;
     private Player currentPlayer;
-    private ArrayList<ArrayList<Objects>> gameMap;
+    public ArrayList<ArrayList<Objects>> gameMap;
     private ArrayList<ArrayList<Actions>> actionList;
     private Player winner;
 
@@ -39,6 +44,7 @@ public class Game {
             throw new IllegalArgumentException("Playerlist contains too few players: "+playerList.size());
         }
     }
+
     private void init(ArrayList<Player> playerList){
         finished = false;
         //setup players
@@ -47,7 +53,7 @@ public class Game {
         currentPlayer = playerList.get(0);
         //make the map
         getInitMap();
-        vc = new ViewController(gameMap, playerList, 5, this);
+        vc = new ViewController();
         //add additional items on the map/grid
         run();
     }

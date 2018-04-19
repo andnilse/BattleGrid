@@ -25,7 +25,12 @@ public class MainActivity extends AppCompatActivity {
         list.add(player2);
 
         Game game = new Game(list);
-        startActivity(new Intent(MainActivity.this, ViewController.class));
+        Intent intent = new Intent(getBaseContext(), ViewController.class);
+        intent.putExtra("GameMap", game.gameMap);
+        intent.putExtra("PlayerList", game.playerList);
+        intent.putExtra("Number", 5);
+        intent.putExtra("Game", game);
+        startActivity(intent);
 
         //123123
     }
