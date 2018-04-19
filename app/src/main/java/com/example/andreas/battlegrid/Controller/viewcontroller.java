@@ -10,10 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.andreas.battlegrid.Map;
-import com.example.andreas.battlegrid.Model.Action;
 import com.example.andreas.battlegrid.Model.Game;
 import com.example.andreas.battlegrid.Model.actions.Actions;
-import com.example.andreas.battlegrid.Model.actions.PlayerMovment;
 import com.example.andreas.battlegrid.Model.actions.Weapon;
 import com.example.andreas.battlegrid.Model.actions.weapons.Pistol;
 import com.example.andreas.battlegrid.Model.objects.Player;
@@ -29,6 +27,15 @@ public class viewcontroller extends AppCompatActivity {
         actionsPerTurn = nrActions;
         game = g;
     }
+
+    /*
+    TODO
+    oppdatere kart når spilere legger til movments
+    resette kart når neste spiller legger til actions
+    legge til liste med våpen
+    legge til for build og move
+
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
