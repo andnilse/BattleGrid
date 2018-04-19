@@ -1,5 +1,6 @@
 package com.example.andreas.battlegrid.Controller;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -43,7 +44,11 @@ public class viewcontroller extends AppCompatActivity {
 
             for (int j =0; j<10; j++){
                 ImageButton ib = new ImageButton(this);
-            //    ib.setBackgroundColor(map.getObj(i,j).getcolor()); // change to get image later
+                if (map.getObj(i,j) != null){
+                    ib.setBackgroundColor(map.getObj(i,j).getcolor()); // change to get image later
+                } else {
+                    ib.setBackgroundColor(Color.LTGRAY);
+                }
                 ib.setClickable(false);
                 ib.setEnabled(false);
                 ib.setTag(0, i);
