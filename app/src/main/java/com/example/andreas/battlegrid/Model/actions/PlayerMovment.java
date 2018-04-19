@@ -13,17 +13,14 @@ public class PlayerMovment extends Actions {
         int y = player.getY();
         if (gameMap.get(x).get(y) == null){
             if (x!=nextX && y!=nextY){
-                if (nextX-1==x && (nextY == y)){
-                    return true;
+                if ((nextX-1==x || (nextX+1 ==x)) && (nextY == y-1 || nextY ==y || nextY ==y+1)){
+                    if ((nextX == x) && (nextY == y+1 || nextY == y-1)){
+                        return true;
+                    }
                 }
             }
-
-            return true;
         }
         return false;
-
-    }
-    private boolean checkCloseTiles(int x, int y, ArrayList<ArrayList<Objects>> gameMap, Player player){
 
     }
 }

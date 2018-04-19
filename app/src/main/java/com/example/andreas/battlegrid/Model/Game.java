@@ -26,6 +26,8 @@ public class Game {
     private Player currentPlayer;
     private ArrayList<ArrayList<Objects>> gameMap;
     private ArrayList<ArrayList<Actions>> actionList;
+    private Player winner;
+    private viewcontroller vc;
 
     public Game(ArrayList<Player> playerList){
         if (playerList.size()>=2){
@@ -42,7 +44,7 @@ public class Game {
         currentPlayer = playerList.get(0);
         //make the map
         getInitMap();
-        viewcontroller vc = new viewcontroller(gameMap, playerList, 5, this);
+        vc = new viewcontroller(gameMap, playerList, 5, this);
         //add additional items on the map/grid
     }
 
@@ -54,9 +56,9 @@ public class Game {
         //each player gives 5 actions to be performed. The actions are done in a round-robin order.
         //Player1action1, player2 action1, player1 action2, player2 action2
         //This is done for every player in the list
-        while (true && !finished){
+        while (!finished){
 
-            for (int index1 = 0;index1<10;index1++){
+            for (int index1 = 0;index1<5;index1++){
                 //For every of the 10 actions
                 for (int index2 = 0;index2<actionList.size();index2++){
                     //For every player
@@ -108,8 +110,17 @@ public class Game {
                     }
                     updateMapView(gameMap);
 
+                    if (currentPlayer.getHealth()<=0){
+                        finished = true;
+                        if (currentPlayer == playerList.get(0)){
+                            winner = playerList.get(1);
+                        }
+                        winner = playerList.get(1);
+                    }
+
                 }
             }
+            actionList = null;
         }
     }
     private void changePlayer(){

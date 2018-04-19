@@ -14,6 +14,7 @@ import com.example.andreas.battlegrid.Model.Game;
 import com.example.andreas.battlegrid.Model.actions.Actions;
 import com.example.andreas.battlegrid.Model.actions.Weapon;
 import com.example.andreas.battlegrid.Model.actions.weapons.Pistol;
+import com.example.andreas.battlegrid.Model.objects.Objects;
 import com.example.andreas.battlegrid.Model.objects.Player;
 import com.example.andreas.battlegrid.R;
 
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 
 public class viewcontroller extends AppCompatActivity {
 
-    viewcontroller(Map map, ArrayList<Player> p, int nrActions, Game g){
+    public viewcontroller(ArrayList<ArrayList<Objects>> map, ArrayList<Player> p, int nrActions, Game g){
         map = map;
         players = p;
         actionsPerTurn = nrActions;
