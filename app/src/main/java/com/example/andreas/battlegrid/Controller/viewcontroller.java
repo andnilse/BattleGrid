@@ -49,8 +49,13 @@ public class ViewController extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.playerchoise);
 
+        game = (Game) getIntent().getSerializableExtra("Game");
+        players = game;
+        actionsPerTurn = getIntent().getIntExtra("Number", 5);
+
         LinearLayout mapLay = (LinearLayout) findViewById(R.id.maplayout);
         LinearLayout.LayoutParams LLParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT);
+
 
         for (int i =0;i<10;i++){
             LinearLayout row = new LinearLayout(this);
@@ -59,8 +64,8 @@ public class ViewController extends AppCompatActivity {
 
             for (int j =0; j<10; j++){
                 ImageButton ib = new ImageButton(this);
-                if (map.getObj(i,j) != null){
-                    ib.setBackgroundColor(map.getObj(i,j).getColor()); // change to get image later
+                if (map.get(i).get(j) != null){
+                    ib.setBackgroundColor(map.get(i).get(j).getColor()); // change to get image later
                 } else {
                     ib.setBackgroundColor(Color.LTGRAY);
                 }
@@ -108,6 +113,21 @@ public class ViewController extends AppCompatActivity {
 
     }
 
+<<<<<<< HEAD:app/src/main/java/com/example/andreas/battlegrid/Controller/viewcontroller.java
+    ArrayList<ImageButton> gridButtons = new ArrayList<>();
+
+    Game game;
+    ArrayList<ArrayList<Objects>> map;
+    ArrayList<Player> players;
+    int actionsPerTurn = 5;
+
+    int curentPlayer = 0;
+    int numberOfCurentInputs = 0;
+    ArrayList<ArrayList<Actions>> plActions = new ArrayList<ArrayList<Actions>>();
+    Actions curentAction = new Pistol();
+
+=======
+>>>>>>> master:app/src/main/java/com/example/andreas/battlegrid/Controller/ViewController.java
 
     public void MapButtonClick(View v){
         if (!(moveActive || buildActive || weaponActive)){
