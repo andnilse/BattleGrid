@@ -43,10 +43,10 @@ public class ViewController extends AppCompatActivity {
         game = (Game) getIntent().getSerializableExtra("Game");
         players = game.playerList;
         map = game.gameMap;
-        actionsPerTurn = getIntent().getIntExtra("Number", 5);
+        actionsPerTurn = 5;
 
         LinearLayout mapLay = (LinearLayout) findViewById(R.id.maplayout);
-        LinearLayout.LayoutParams LLParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT);
+        LinearLayout.LayoutParams LLParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
 
 
         for (int i =0;i<10;i++){
@@ -56,8 +56,8 @@ public class ViewController extends AppCompatActivity {
 
             for (int j =0; j<10; j++){
                 ImageButton ib = new ImageButton(this);
-                
-                RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+
+                RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(130, 130);
                 ib.setLayoutParams(lp);
 
                 if (map.get(i).get(j) != null){
@@ -67,8 +67,8 @@ public class ViewController extends AppCompatActivity {
                 }
                 ib.setClickable(false);
                 ib.setEnabled(false);
-                ib.setTag(0, i);
-                ib.setTag(1, j);
+                ib.setTag(R.string.tagIDx, i);
+                ib.setTag(R.string.tagIDy, j);
                 ib.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -126,8 +126,8 @@ public class ViewController extends AppCompatActivity {
             return;
         }
 
-        int i = (int) v.getTag(0);
-        int j = (int) v.getTag(1);
+        int i = (int) v.getTag(R.string.tagIDx);
+        int j = (int) v.getTag(R.string.tagIDy);
 
         if (curentAction.calculateAlowedTargets(players.get(curentPlayer),i,j)){
             curentAction.setTarget(i,j);

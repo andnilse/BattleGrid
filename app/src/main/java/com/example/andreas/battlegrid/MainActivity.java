@@ -9,9 +9,10 @@ import com.example.andreas.battlegrid.Controller.ViewController;
 import com.example.andreas.battlegrid.Model.Game;
 import com.example.andreas.battlegrid.Model.objects.Player;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Serializable {
     ArrayList<Player> list = new ArrayList<>();
 
     @Override
@@ -25,10 +26,7 @@ public class MainActivity extends AppCompatActivity {
         list.add(player2);
 
         Game game = new Game(list);
-        Intent intent = new Intent(getBaseContext(), ViewController.class);
-        intent.putExtra("GameMap", game.gameMap);
-        intent.putExtra("PlayerList", game.playerList);
-        intent.putExtra("Number", 5);
+        Intent intent = new Intent(this, ViewController.class);
         intent.putExtra("Game", game);
         startActivity(intent);
 

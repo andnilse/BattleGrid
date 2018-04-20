@@ -30,7 +30,7 @@ public class Game implements Serializable{
     public ArrayList<Player> playerList;
     private Player currentPlayer;
     public ArrayList<ArrayList<Objects>> gameMap;
-    private ArrayList<ArrayList<Actions>> actionList;
+    private ArrayList<ArrayList<Actions>> actionList = new ArrayList<ArrayList<Actions>>();
     private Player winner;
 
     private ViewController vc;
@@ -53,13 +53,14 @@ public class Game implements Serializable{
         currentPlayer = playerList.get(0);
         //make the map
         getInitMap();
-        vc = new ViewController();
+        //vc = new ViewController();
         //add additional items on the map/grid
-        run();
+
     }
 
     public void setActionList(ArrayList<ArrayList<Actions>> actionList){
         this.actionList = actionList;
+        run();
     }
     public void run(){
         //turn-based multiplayer
@@ -67,13 +68,7 @@ public class Game implements Serializable{
         //Player1action1, player2 action1, player1 action2, player2 action2
         //This is done for every player in the list
         while (!finished){
-            while(actionList==null){
-                try{
-                    Thread.sleep(500);
-                }catch(InterruptedException e){
-                    e.printStackTrace();
-                }
-            }
+
             for (int index1 = 0;index1<5;index1++){
                 //For every of the 10 actions
                 for (int index2 = 0;index2<actionList.size();index2++){
