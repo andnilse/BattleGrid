@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.andreas.battlegrid.Model.Game;
@@ -17,6 +18,7 @@ import com.example.andreas.battlegrid.Model.actions.BuildWall;
 import com.example.andreas.battlegrid.Model.actions.PlayerMovment;
 import com.example.andreas.battlegrid.Model.actions.Weapon;
 import com.example.andreas.battlegrid.Model.actions.weapons.Gun;
+import com.example.andreas.battlegrid.Model.actions.MakeTrap;
 import com.example.andreas.battlegrid.Model.actions.weapons.Pistol;
 import com.example.andreas.battlegrid.Model.objects.Objects;
 import com.example.andreas.battlegrid.Model.objects.Player;
@@ -156,8 +158,10 @@ public class ViewController extends AppCompatActivity {
 
         if (numberOfCurentInputs >= actionsPerTurn){
             curentPlayer++;
-            EditText text = (EditText) findViewById(R.id.editText);
+            TextView text = (TextView) findViewById(R.id.editText);
             text.setText("Input from player" + (curentPlayer +1));
+            // TODO resett kart
+
             if (curentPlayer >= players.size()){
                 game.setActionList(plActions);
             }
@@ -211,7 +215,7 @@ public class ViewController extends AppCompatActivity {
     }
 
     boolean weaponActive = false;
-    Weapon weapon = new Gun();
+    Actions weapon = new Gun();
     public void shoot(View v){
 
         Button move = (Button) findViewById(R.id.ibMovment);
@@ -249,12 +253,20 @@ public class ViewController extends AppCompatActivity {
     }
 
     public void trap(View v){
-        weapon = new Trap
+        weapon = new MakeTrap();
         curentAction = weapon;
         Button gun = (Button) findViewById(R.id.ibGun);
         gun.setEnabled(true);
         Button trap = (Button) findViewById(R.id.ibTrap);
         trap.setEnabled(false);
+    }
+
+    public void updateMap (ArrayList<ArrayList<Objects>> newmap){
+        for (int i =0; i<gridButtons.size();i++){
+            if (newmap.get((int) gridButtons.get(i).getTag(R.string.tagIDx)).get((int) gridButtons.get(i).getTag(R.string.tagIDy)) == null){
+
+            }
+        }
     }
 
     public void receaveMaps (ArrayList<ArrayList<ArrayList<Objects>>> newMap){
