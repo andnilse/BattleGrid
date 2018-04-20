@@ -2,12 +2,15 @@ package com.example.andreas.battlegrid.Controller;
 
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -51,6 +54,11 @@ public class ViewController extends AppCompatActivity {
         map = game.gameMap;
         actionsPerTurn = 5;
 
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int height = displayMetrics.heightPixels;
+        int width = displayMetrics.widthPixels;
+
         LinearLayout mapLay = (LinearLayout) findViewById(R.id.maplayout);
         LinearLayout.LayoutParams LLParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
 
@@ -62,20 +70,20 @@ public class ViewController extends AppCompatActivity {
             for (int j =0; j<10; j++){
                 ImageButton ib = new ImageButton(this);
                 
-                RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(100, 100);
-                ib.setPadding(5,5,5,5);
+                RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(width/10, width/10);
 
                 ib.setLayoutParams(lp);
 
                 if (map.get(i).get(j) != null){
                     ib.setImageResource(map.get(i).get(j).getIcon()); // change to get image later
                 } else {
-                    ib.setBackgroundColor(Color.LTGRAY);
+                    ib.setColorFilter(Color.LTGRAY);
                 }
-                ib.setClickable(false);
-                ib.setEnabled(false);
+
                 ib.setTag(R.string.tagIDx, i);
                 ib.setTag(R.string.tagIDy, j);
+                ib.setScaleType(ImageButton.ScaleType.CENTER_INSIDE);
+                ib.setPadding(2,2,2,2);
                 ib.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -114,7 +122,7 @@ public class ViewController extends AppCompatActivity {
         });
 
         Button gun = (Button) findViewById(R.id.ibGun);
-        shoot.setOnClickListener(new View.OnClickListener() {
+        gun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 gun(v);
@@ -122,13 +130,17 @@ public class ViewController extends AppCompatActivity {
         });
 
         Button trap = (Button) findViewById(R.id.ibTrap);
-        shoot.setOnClickListener(new View.OnClickListener() {
+        trap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 trap(v);
             }
         });
 
+
+
+        gun.setEnabled(false);
+        trap.setEnabled(false);
     }
 
     ArrayList<ImageButton> gridButtons = new ArrayList<>();
@@ -219,6 +231,10 @@ public class ViewController extends AppCompatActivity {
             curentAction = null;
         }
 
+        Button gun = (Button) findViewById(R.id.ibGun);
+        gun.setEnabled(false);
+        Button trap = (Button) findViewById(R.id.ibTrap);
+        trap.setEnabled(false);
     }
 
     boolean buildActive = false;
@@ -241,6 +257,11 @@ public class ViewController extends AppCompatActivity {
             curentAction = null;
         }
 
+        Button gun = (Button) findViewById(R.id.ibGun);
+        gun.setEnabled(false);
+        Button trap = (Button) findViewById(R.id.ibTrap);
+        trap.setEnabled(false);
+
     }
 
     boolean weaponActive = false;
@@ -262,6 +283,11 @@ public class ViewController extends AppCompatActivity {
             Button trap = (Button) findViewById(R.id.ibTrap);
             trap.setEnabled(true);
         } else {
+
+            Button gun = (Button) findViewById(R.id.ibGun);
+            gun.setEnabled(false);
+            Button trap = (Button) findViewById(R.id.ibTrap);
+            trap.setEnabled(false);
 
             move.setEnabled(true);
             build.setEnabled(true);
