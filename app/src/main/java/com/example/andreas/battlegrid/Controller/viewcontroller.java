@@ -4,12 +4,13 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.example.andreas.battlegrid.Map;
 import com.example.andreas.battlegrid.Model.Game;
 import com.example.andreas.battlegrid.Model.actions.Actions;
 import com.example.andreas.battlegrid.Model.actions.BuildWall;
@@ -32,17 +33,7 @@ public class ViewController extends AppCompatActivity {
     legge til for build og move
 
      */
-    ArrayList<ImageButton> gridButtons = new ArrayList<>();
 
-    Game game = null;
-    Map map = null;
-    ArrayList<Player> players;
-    int actionsPerTurn = 5;
-
-    int curentPlayer = 0;
-    int numberOfCurentInputs = 0;
-    ArrayList<ArrayList<Actions>> plActions = new ArrayList<ArrayList<Actions>>();
-    Actions curentAction = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +41,8 @@ public class ViewController extends AppCompatActivity {
         setContentView(R.layout.playerchoise);
 
         game = (Game) getIntent().getSerializableExtra("Game");
-        players = game;
+        players = game.playerList;
+        map = game.gameMap;
         actionsPerTurn = getIntent().getIntExtra("Number", 5);
 
         LinearLayout mapLay = (LinearLayout) findViewById(R.id.maplayout);
@@ -64,6 +56,10 @@ public class ViewController extends AppCompatActivity {
 
             for (int j =0; j<10; j++){
                 ImageButton ib = new ImageButton(this);
+                
+                RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+                ib.setLayoutParams(lp);
+
                 if (map.get(i).get(j) != null){
                     ib.setBackgroundColor(map.get(i).get(j).getColor()); // change to get image later
                 } else {
@@ -113,7 +109,6 @@ public class ViewController extends AppCompatActivity {
 
     }
 
-<<<<<<< HEAD:app/src/main/java/com/example/andreas/battlegrid/Controller/viewcontroller.java
     ArrayList<ImageButton> gridButtons = new ArrayList<>();
 
     Game game;
@@ -125,9 +120,6 @@ public class ViewController extends AppCompatActivity {
     int numberOfCurentInputs = 0;
     ArrayList<ArrayList<Actions>> plActions = new ArrayList<ArrayList<Actions>>();
     Actions curentAction = new Pistol();
-
-=======
->>>>>>> master:app/src/main/java/com/example/andreas/battlegrid/Controller/ViewController.java
 
     public void MapButtonClick(View v){
         if (!(moveActive || buildActive || weaponActive)){
