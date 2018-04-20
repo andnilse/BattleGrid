@@ -1,4 +1,4 @@
-package com.example.andreas.battlegrid.Model.actions.weapons;
+package com.example.andreas.battlegrid.Model.objects;
 
 import com.example.andreas.battlegrid.Model.actions.Weapon;
 import com.example.andreas.battlegrid.Model.objects.Objects;
