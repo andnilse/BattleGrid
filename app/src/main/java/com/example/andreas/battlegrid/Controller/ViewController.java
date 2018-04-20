@@ -28,6 +28,7 @@ import com.example.andreas.battlegrid.Model.objects.Objects;
 import com.example.andreas.battlegrid.Model.objects.Player;
 import com.example.andreas.battlegrid.Model.objects.Trap;
 import com.example.andreas.battlegrid.Model.objects.Wall;
+import com.example.andreas.battlegrid.Model.objects.nothing;
 import com.example.andreas.battlegrid.R;
 
 import java.util.ArrayList;
@@ -51,6 +52,9 @@ public class ViewController extends AppCompatActivity {
 
         game = (Game) getIntent().getSerializableExtra("Game");
         players = game.playerList;
+        for ( int i =0; i<players.size();i++) {
+            plActions.add(new ArrayList<Actions>());
+        }
         map = game.gameMap;
         curentMap = map;
         actionsPerTurn = 5;
@@ -168,15 +172,19 @@ public class ViewController extends AppCompatActivity {
         if (curentAction.calculateAlowedTargets(i, j, curentMap, players.get(curentPlayer))){
             curentAction.setTarget(i,j);
 
-            ArrayList<ArrayList<Objects>> newMap = map;
+
             if (curentAction instanceof PlayerMovment){
-                newMap.get(i).set(j, players.get(curentPlayer));
-                newMap.get(players.get(curentPlayer).getX()).set(players.get(curentPlayer).getY(), null);
+                curentMap.get(players.get(curentPlayer).getX()).set(players.get(curentPlayer).getY(), new nothing());
+                players.get(curentPlayer).setX(i);
+                players.get(curentPlayer).setY(j);
+                curentMap.get(i).set(j, players.get(curentPlayer));
+
             } else if (curentAction instanceof BuildWall){
-                newMap.get(i).set(j, new Wall());
+                curentMap.get(i).set(j, new Wall());
             } else if (curentAction instanceof MakeTrap){
-                newMap.get(i).set(j, new Trap());
+                curentMap.get(i).set(j, new Trap());
             }
+            updateMap(curentMap);
 
 
 
@@ -189,10 +197,13 @@ public class ViewController extends AppCompatActivity {
 
         if (numberOfCurentInputs >= actionsPerTurn){
             curentPlayer++;
+            numberOfCurentInputs =0;
             TextView text = (TextView) findViewById(R.id.editText);
             text.setText("Input from player" + (curentPlayer +1));
+            //TODO Hente map + players fra game
             updateMap(map);
             curentMap = map;
+
 
             if (curentPlayer >= players.size()){
                 game.setActionList(plActions, this);
@@ -211,7 +222,7 @@ public class ViewController extends AppCompatActivity {
             }
         }
 
-
+        int sdfsdfsdf = 0;
     }
 
     boolean moveActive = false;
@@ -321,11 +332,8 @@ public class ViewController extends AppCompatActivity {
 
     public void updateMap (ArrayList<ArrayList<Objects>> newmap){
         for (int i =0; i<gridButtons.size();i++){
-            if (newmap.get((int) gridButtons.get(i).getTag(R.string.tagIDx)).get((int) gridButtons.get(i).getTag(R.string.tagIDy)) == null){
-                gridButtons.get(i).setBackgroundColor(Color.LTGRAY);
-            } else {
-                gridButtons.get(i).setImageResource(newmap.get((int) gridButtons.get(i).getTag(R.string.tagIDx)).get((int) gridButtons.get(i).getTag(R.string.tagIDy)).getIcon());
-            }
+            //gridButtons.get(i).setImageResource(newmap.get(gridButtons.get(i).getTag(R.string.tagIDx)).get(gridButtons.get(i).getTag(R.string.tagIDy)).getIcon());
+            gridButtons.get(i).setImageResource(newmap.get((int) gridButtons.get(i).getTag(R.string.tagIDx)).get((int) gridButtons.get(i).getTag(R.string.tagIDy)).getIcon());
         }
     }
 
