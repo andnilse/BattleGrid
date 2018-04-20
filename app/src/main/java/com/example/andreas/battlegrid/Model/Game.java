@@ -56,8 +56,9 @@ public class Game implements Serializable{
         updateMapView(gameMap);
     }
 
-    public void setActionList(ArrayList<ArrayList<Actions>> actionList){
+    public void setActionList(ArrayList<ArrayList<Actions>> actionList, ViewController vc){
         this.actionList = actionList;
+        this.vc = vc;
         run();
     }
     public void run(){
