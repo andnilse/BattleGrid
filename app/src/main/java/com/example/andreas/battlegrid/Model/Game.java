@@ -39,6 +39,10 @@ public class Game implements Serializable{
         }else{
             throw new IllegalArgumentException("Playerlist contains too few players: "+playerList.size());
         }
+        getInitMap();
+        gameMap.get(0).set(0, playerList.get(0));
+        gameMap.get(9).set(9, playerList.get(1));
+        updateMapView(gameMap);
     }
 
     private void init(ArrayList<Player> playerList){
@@ -48,12 +52,10 @@ public class Game implements Serializable{
         this.numPlayers = playerList.size();
         currentPlayer = playerList.get(0);
         //make the map
-        getInitMap();
+
         //vc = new ViewController();
         //add additional items on the map/grid
-        gameMap.get(0).set(0, playerList.get(0));
-        gameMap.get(9).set(9, playerList.get(1));
-        updateMapView(gameMap);
+
     }
 
     public void setActionList(ArrayList<ArrayList<Actions>> actionList, ViewController vc){
