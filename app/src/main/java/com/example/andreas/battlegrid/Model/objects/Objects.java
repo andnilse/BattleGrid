@@ -2,11 +2,13 @@ package com.example.andreas.battlegrid.Model.objects;
 
 import android.graphics.Color;
 
+import java.io.Serializable;
+
 /**
  * Created by Andreas on 22.02.2018.
  */
 
-public class Objects{
+public class Objects implements Serializable {
     private int x,y;
     private String name;
     private int health;

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Battle Grid</string>
+    <string name="tagIDx">0</string>
+    <string name="tagIDy">1</string>
 </resources>

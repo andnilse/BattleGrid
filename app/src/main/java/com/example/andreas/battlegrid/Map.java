@@ -4,11 +4,12 @@ import com.example.andreas.battlegrid.Model.Action;
 import com.example.andreas.battlegrid.Model.objects.Objects;
 import com.example.andreas.battlegrid.Model.objects.Player;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import java.util.ArrayList;
 
-public class Map {
+public class Map implements Serializable {
     private Map map;
 
     public Map(){
