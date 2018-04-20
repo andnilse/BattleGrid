@@ -63,15 +63,12 @@ public class ViewController extends AppCompatActivity {
                 ImageButton ib = new ImageButton(this);
                 
                 RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(130, 130);
-                lp.bottomMargin = 5;
-                lp.leftMargin = 5;
-                lp.rightMargin = 5;
-                lp.topMargin = 5;
+                ib.setPadding(5,5,5,5);
 
                 ib.setLayoutParams(lp);
 
                 if (map.get(i).get(j) != null){
-                    ib.setBackgroundColor(map.get(i).get(j).getColor()); // change to get image later
+                    ib.setBackgroundColor(map.get(i).get(j).getIcon()); // change to get image later
                 } else {
                     ib.setBackgroundColor(Color.LTGRAY);
                 }
