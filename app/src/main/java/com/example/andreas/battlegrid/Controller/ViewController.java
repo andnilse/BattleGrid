@@ -68,7 +68,7 @@ public class ViewController extends AppCompatActivity {
                 ib.setLayoutParams(lp);
 
                 if (map.get(i).get(j) != null){
-                    ib.setBackgroundColor(map.get(i).get(j).getColor()); // change to get image later
+                    ib.setBackgroundColor(map.get(i).get(j).getIcon()); // change to get image later
                 } else {
                     ib.setBackgroundColor(Color.LTGRAY);
                 }
