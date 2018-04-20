@@ -7,12 +7,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <EditText
+    <TextView
         android:id="@+id/editText"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:text="Input from player1" />
+        android:layout_gravity="center"
+        android:text="Input from player1"
+        android:textSize="20sp" />
 
     <LinearLayout
         android:id="@+id/maplayout"
@@ -28,34 +29,34 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <ImageButton
+
+        <Button
             android:id="@+id/ibMovment"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:background="@android:color/holo_blue_bright"
             android:contentDescription="Move"
             android:onClick="move"
-            app:srcCompat="@color/colorPrimaryDark" />
+            android:text="Move" />
 
-        <ImageButton
+        <Button
             android:id="@+id/ibBuild"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:background="@android:color/background_dark"
             android:contentDescription="Build"
             android:onClick="build"
+            android:text="Build"
             app:srcCompat="@color/colorPrimary" />
 
-        <ImageButton
+        <Button
             android:id="@+id/ibWeapon"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:background="@android:color/holo_red_dark"
             android:contentDescription="Shoot"
             android:onClick="shoot"
+            android:text="Shoot"
             app:srcCompat="@color/colorAccent" />
 
     </LinearLayout>
@@ -66,18 +67,20 @@
         android:layout_weight="1"
         android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/imageButton"
+        <Button
+            android:id="@+id/ibGun"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_weight="1"
+            android:text="Gun"
             app:srcCompat="@android:color/holo_blue_dark" />
 
-        <ImageButton
-            android:id="@+id/imageButton2"
+        <Button
+            android:id="@+id/ibTrap"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_weight="1"
+            android:text="trap"
             app:srcCompat="@android:color/holo_green_light" />
     </LinearLayout>
 </LinearLayout>

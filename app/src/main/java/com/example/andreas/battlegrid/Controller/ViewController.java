@@ -82,7 +82,7 @@ public class ViewController extends AppCompatActivity {
             mapLay.addView(row);
         }
 
-        ImageButton move = (ImageButton) findViewById(R.id.ibMovment);
+        Button move = (Button) findViewById(R.id.ibMovment);
         move.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,7 +90,7 @@ public class ViewController extends AppCompatActivity {
             }
         });
 
-        ImageButton build = (ImageButton) findViewById(R.id.ibBuild);
+        Button build = (Button) findViewById(R.id.ibBuild);
         build.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,7 +98,7 @@ public class ViewController extends AppCompatActivity {
             }
         });
 
-        final ImageButton shoot = (ImageButton) findViewById(R.id.ibWeapon);
+        Button shoot = (Button) findViewById(R.id.ibWeapon);
         shoot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -152,8 +152,8 @@ public class ViewController extends AppCompatActivity {
 
     boolean moveActive = false;
     public void move(View v){
-        ImageButton build = (ImageButton) findViewById(R.id.ibBuild);
-        ImageButton shoot = (ImageButton) findViewById(R.id.ibWeapon);
+        Button build = (Button) findViewById(R.id.ibBuild);
+        Button shoot = (Button) findViewById(R.id.ibWeapon);
         if (!moveActive){
 
             build.setEnabled(false);
@@ -174,8 +174,8 @@ public class ViewController extends AppCompatActivity {
 
     boolean buildActive = false;
     public void build(View v){
-        ImageButton move = (ImageButton) findViewById(R.id.ibMovment);
-        ImageButton shoot = (ImageButton) findViewById(R.id.ibWeapon);
+        Button move = (Button) findViewById(R.id.ibMovment);
+        Button shoot = (Button) findViewById(R.id.ibWeapon);
         if (!buildActive){
 
             move.setEnabled(false);
@@ -198,8 +198,8 @@ public class ViewController extends AppCompatActivity {
     Weapon weapon = new Pistol();
     public void shoot(View v){
 
-        ImageButton move = (ImageButton) findViewById(R.id.ibMovment);
-        ImageButton build = (ImageButton) findViewById(R.id.ibBuild);
+        Button move = (Button) findViewById(R.id.ibMovment);
+        Button build = (Button) findViewById(R.id.ibBuild);
         if (!weaponActive){
 
             move.setEnabled(false);
