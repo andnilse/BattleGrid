@@ -49,6 +49,7 @@ public class ViewController extends AppCompatActivity {
         game = (Game) getIntent().getSerializableExtra("Game");
         players = game.playerList;
         map = game.gameMap;
+        curentMap = map;
         actionsPerTurn = 5;
 
         LinearLayout mapLay = (LinearLayout) findViewById(R.id.maplayout);
@@ -142,6 +143,7 @@ public class ViewController extends AppCompatActivity {
     int numberOfCurentInputs = 0;
     ArrayList<ArrayList<Actions>> plActions = new ArrayList<ArrayList<Actions>>();
     Actions curentAction = new Pistol();
+    ArrayList<ArrayList<Objects>> curentMap;
 
     public void MapButtonClick(View v){
         if (!(moveActive || buildActive || weaponActive)){
@@ -154,14 +156,17 @@ public class ViewController extends AppCompatActivity {
         if (curentAction.calculateAlowedTargets(players.get(curentPlayer),i,j)){
             curentAction.setTarget(i,j);
 
-            ArrayList<ArrayList<Objects>> newMap = map;
+
             if (curentAction instanceof PlayerMovment){
-                newMap.get(i).set(j, players.get(curentPlayer));
-                newMap.get(players.get(curentPlayer).getX()).set(players.get(curentPlayer).getY(), null);
+                curentMap.get(i).set(j, players.get(curentPlayer));
+                curentMap.get(players.get(curentPlayer).getX()).set(players.get(curentPlayer).getY(), null);
+                updateMap(curentMap);
             } else if (curentAction instanceof BuildWall){
-                newMap.get(i).set(j, new Wall());
+                curentMap.get(i).set(j, new Wall());
+                updateMap(curentMap);
             } else if (curentAction instanceof MakeTrap){
-                newMap.get(i).set(j, new Trap());
+                curentMap.get(i).set(j, new Trap());
+                updateMap(curentMap);
             }
 
 
@@ -178,6 +183,7 @@ public class ViewController extends AppCompatActivity {
             TextView text = (TextView) findViewById(R.id.editText);
             text.setText("Input from player" + (curentPlayer +1));
             updateMap(map);
+            curentMap = map;
 
             if (curentPlayer >= players.size()){
                 game.setActionList(plActions, this);
@@ -255,7 +261,7 @@ public class ViewController extends AppCompatActivity {
             build.setEnabled(false);
 
             weaponActive = true;
-            curentAction = weapon;
+            curentAction = new Gun();
 
             Button gun = (Button) findViewById(R.id.ibGun);
             gun.setEnabled(false);
@@ -265,6 +271,11 @@ public class ViewController extends AppCompatActivity {
 
             move.setEnabled(true);
             build.setEnabled(true);
+
+            Button gun = (Button) findViewById(R.id.ibGun);
+            gun.setEnabled(false);
+            Button trap = (Button) findViewById(R.id.ibTrap);
+            trap.setEnabled(false);
 
             weaponActive = false;
             curentAction = null;
