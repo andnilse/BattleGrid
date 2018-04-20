@@ -50,4 +50,7 @@ public class Objects implements Serializable {
         this.health = health;
     }
     public int getColor(){return Color.LTGRAY;}
+    public int getIcon(){
+        return 0;
+    }
 }
