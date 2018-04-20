@@ -18,7 +18,7 @@ public class Trap extends Objects {
     }
 
     public Trap(){
-        trapIcon = R.mipmap.grayTrap;
+        trapIcon = R.mipmap.trap;
     }
     public boolean CalculateAllowedTargets(int nextX, int nextY, ArrayList<ArrayList<Objects>> gameMap, Player player){
         int x = player.getX();

@@ -45,8 +45,8 @@
                                   <option name="values">
                                     <map>
                                       <entry key="backgroundLayerName" value="ic_launcher_background" />
-                                      <entry key="foregroundImage" value="C:\Users\Andreas\Desktop\wall.png" />
-                                      <entry key="outputName" value="wall" />
+                                      <entry key="foregroundImage" value="C:\Users\Andreas\Desktop\graytrap.png" />
+                                      <entry key="outputName" value="trap" />
                                     </map>
                                   </option>
                                 </PersistentState>
