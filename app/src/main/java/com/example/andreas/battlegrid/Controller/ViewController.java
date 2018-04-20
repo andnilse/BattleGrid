@@ -67,6 +67,7 @@ public class ViewController extends AppCompatActivity {
                 lp.leftMargin = 5;
                 lp.rightMargin = 5;
                 lp.topMargin = 5;
+
                 ib.setLayoutParams(lp);
 
                 if (map.get(i).get(j) != null){

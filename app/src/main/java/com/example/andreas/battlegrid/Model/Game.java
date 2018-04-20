@@ -51,7 +51,9 @@ public class Game implements Serializable{
         getInitMap();
         //vc = new ViewController();
         //add additional items on the map/grid
-
+        gameMap.get(0).set(0, playerList.get(0));
+        gameMap.get(9).set(9, playerList.get(1));
+        updateMapView(gameMap);
     }
 
     public void setActionList(ArrayList<ArrayList<Actions>> actionList){
