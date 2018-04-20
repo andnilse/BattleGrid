@@ -2,6 +2,8 @@ package com.example.andreas.battlegrid.Model.objects;
 
 import android.graphics.drawable.Drawable;
 
+import com.example.andreas.battlegrid.R;
+
 /**
  * Created by Andreas on 22.02.2018.
  */

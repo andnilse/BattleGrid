@@ -62,7 +62,7 @@ public class ViewController extends AppCompatActivity {
             for (int j =0; j<10; j++){
                 ImageButton ib = new ImageButton(this);
                 
-                RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(130, 130);
+                RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(100, 100);
                 ib.setPadding(5,5,5,5);
 
                 ib.setLayoutParams(lp);
