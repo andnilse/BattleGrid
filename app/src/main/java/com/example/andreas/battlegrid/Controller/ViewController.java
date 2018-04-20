@@ -1,6 +1,7 @@
 package com.example.andreas.battlegrid.Controller;
 
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -22,6 +23,8 @@ import com.example.andreas.battlegrid.Model.actions.MakeTrap;
 import com.example.andreas.battlegrid.Model.actions.weapons.Pistol;
 import com.example.andreas.battlegrid.Model.objects.Objects;
 import com.example.andreas.battlegrid.Model.objects.Player;
+import com.example.andreas.battlegrid.Model.objects.Trap;
+import com.example.andreas.battlegrid.Model.objects.Wall;
 import com.example.andreas.battlegrid.R;
 
 import java.util.ArrayList;
@@ -51,7 +54,6 @@ public class ViewController extends AppCompatActivity {
         LinearLayout mapLay = (LinearLayout) findViewById(R.id.maplayout);
         LinearLayout.LayoutParams LLParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
 
-
         for (int i =0;i<10;i++){
             LinearLayout row = new LinearLayout(this);
             row.setOrientation(LinearLayout.HORIZONTAL);
@@ -61,6 +63,10 @@ public class ViewController extends AppCompatActivity {
                 ImageButton ib = new ImageButton(this);
 
                 RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(130, 130);
+                lp.bottomMargin = 5;
+                lp.leftMargin = 5;
+                lp.rightMargin = 5;
+                lp.topMargin = 5;
                 ib.setLayoutParams(lp);
 
                 if (map.get(i).get(j) != null){
@@ -149,6 +155,19 @@ public class ViewController extends AppCompatActivity {
 
         if (curentAction.calculateAlowedTargets(players.get(curentPlayer),i,j)){
             curentAction.setTarget(i,j);
+
+            ArrayList<ArrayList<Objects>> newMap = map;
+            if (curentAction instanceof PlayerMovment){
+                newMap.get(i).set(j, players.get(curentPlayer));
+                newMap.get(players.get(curentPlayer).getX()).set(players.get(curentPlayer).getY(), null);
+            } else if (curentAction instanceof BuildWall){
+                newMap.get(i).set(j, new Wall());
+            } else if (curentAction instanceof MakeTrap){
+                newMap.get(i).set(j, new Trap());
+            }
+
+
+
             plActions.get(curentPlayer).add(curentAction);
             numberOfCurentInputs ++;
         } else {
@@ -160,10 +179,22 @@ public class ViewController extends AppCompatActivity {
             curentPlayer++;
             TextView text = (TextView) findViewById(R.id.editText);
             text.setText("Input from player" + (curentPlayer +1));
-            // TODO resett kart
+            updateMap(map);
 
             if (curentPlayer >= players.size()){
-                game.setActionList(plActions);
+                game.setActionList(plActions, this);
+
+                Button move = (Button) findViewById(R.id.ibMovment);
+                move.setEnabled(false);
+                Button build = (Button) findViewById(R.id.ibBuild);
+                build.setEnabled(false);
+                Button shoot = (Button) findViewById(R.id.ibWeapon);
+                shoot.setEnabled(false);
+                Button gun = (Button) findViewById(R.id.ibGun);
+                gun.setEnabled(false);
+                Button trap = (Button) findViewById(R.id.ibTrap);
+                trap.setEnabled(false);
+
             }
         }
 
@@ -264,7 +295,9 @@ public class ViewController extends AppCompatActivity {
     public void updateMap (ArrayList<ArrayList<Objects>> newmap){
         for (int i =0; i<gridButtons.size();i++){
             if (newmap.get((int) gridButtons.get(i).getTag(R.string.tagIDx)).get((int) gridButtons.get(i).getTag(R.string.tagIDy)) == null){
-
+                gridButtons.get(i).setBackgroundColor(Color.LTGRAY);
+            } else {
+                gridButtons.get(i).setBackgroundColor(newmap.get((int) gridButtons.get(i).getTag(R.string.tagIDx)).get((int) gridButtons.get(i).getTag(R.string.tagIDy)).getColor());
             }
         }
     }
