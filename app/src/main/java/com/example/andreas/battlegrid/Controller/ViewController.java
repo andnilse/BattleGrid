@@ -16,6 +16,7 @@ import com.example.andreas.battlegrid.Model.actions.Actions;
 import com.example.andreas.battlegrid.Model.actions.BuildWall;
 import com.example.andreas.battlegrid.Model.actions.PlayerMovment;
 import com.example.andreas.battlegrid.Model.actions.Weapon;
+import com.example.andreas.battlegrid.Model.actions.weapons.Gun;
 import com.example.andreas.battlegrid.Model.actions.weapons.Pistol;
 import com.example.andreas.battlegrid.Model.objects.Objects;
 import com.example.andreas.battlegrid.Model.objects.Player;
@@ -106,6 +107,21 @@ public class ViewController extends AppCompatActivity {
             }
         });
 
+        Button gun = (Button) findViewById(R.id.ibGun);
+        shoot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gun(v);
+            }
+        });
+
+        Button trap = (Button) findViewById(R.id.ibTrap);
+        shoot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                trap(v);
+            }
+        });
 
     }
 
@@ -195,7 +211,7 @@ public class ViewController extends AppCompatActivity {
     }
 
     boolean weaponActive = false;
-    Weapon weapon = new Pistol();
+    Weapon weapon = new Gun();
     public void shoot(View v){
 
         Button move = (Button) findViewById(R.id.ibMovment);
@@ -207,6 +223,11 @@ public class ViewController extends AppCompatActivity {
 
             weaponActive = true;
             curentAction = weapon;
+
+            Button gun = (Button) findViewById(R.id.ibGun);
+            gun.setEnabled(false);
+            Button trap = (Button) findViewById(R.id.ibTrap);
+            trap.setEnabled(true);
         } else {
 
             move.setEnabled(true);
@@ -216,6 +237,24 @@ public class ViewController extends AppCompatActivity {
             curentAction = null;
         }
 
+    }
+
+    public void gun(View v){
+        weapon = new Gun();
+        curentAction = weapon;
+        Button gun = (Button) findViewById(R.id.ibGun);
+        gun.setEnabled(false);
+        Button trap = (Button) findViewById(R.id.ibTrap);
+        trap.setEnabled(true);
+    }
+
+    public void trap(View v){
+        weapon = new Trap
+        curentAction = weapon;
+        Button gun = (Button) findViewById(R.id.ibGun);
+        gun.setEnabled(true);
+        Button trap = (Button) findViewById(R.id.ibTrap);
+        trap.setEnabled(false);
     }
 
     public void receaveMaps (ArrayList<ArrayList<ArrayList<Objects>>> newMap){
