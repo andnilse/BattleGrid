@@ -68,7 +68,7 @@ public class ViewController extends AppCompatActivity {
                 ib.setLayoutParams(lp);
 
                 if (map.get(i).get(j) != null){
-                    ib.setBackgroundColor(map.get(i).get(j).getIcon()); // change to get image later
+                    ib.setImageResource(map.get(i).get(j).getIcon()); // change to get image later
                 } else {
                     ib.setBackgroundColor(Color.LTGRAY);
                 }
@@ -295,7 +295,7 @@ public class ViewController extends AppCompatActivity {
             if (newmap.get((int) gridButtons.get(i).getTag(R.string.tagIDx)).get((int) gridButtons.get(i).getTag(R.string.tagIDy)) == null){
                 gridButtons.get(i).setBackgroundColor(Color.LTGRAY);
             } else {
-                gridButtons.get(i).setBackgroundColor(newmap.get((int) gridButtons.get(i).getTag(R.string.tagIDx)).get((int) gridButtons.get(i).getTag(R.string.tagIDy)).getColor());
+                gridButtons.get(i).setImageResource(newmap.get((int) gridButtons.get(i).getTag(R.string.tagIDx)).get((int) gridButtons.get(i).getTag(R.string.tagIDy)).getIcon());
             }
         }
     }
