@@ -52,6 +52,7 @@ public class ViewController extends AppCompatActivity {
         game = (Game) getIntent().getSerializableExtra("Game");
         players = game.playerList;
         map = game.gameMap;
+        curentMap = map;
         actionsPerTurn = 5;
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -154,6 +155,7 @@ public class ViewController extends AppCompatActivity {
     int numberOfCurentInputs = 0;
     ArrayList<ArrayList<Actions>> plActions = new ArrayList<ArrayList<Actions>>();
     Actions curentAction = new Pistol();
+    ArrayList<ArrayList<Objects>> curentMap;
 
     public void MapButtonClick(View v){
         if (!(moveActive || buildActive || weaponActive)){
@@ -163,7 +165,7 @@ public class ViewController extends AppCompatActivity {
         int i = (int) v.getTag(R.string.tagIDx);
         int j = (int) v.getTag(R.string.tagIDy);
 
-        if (curentAction.calculateAlowedTargets(players.get(curentPlayer),i,j)){
+        if (curentAction.calculateAlowedTargets(i, j, curentMap, players.get(curentPlayer))){
             curentAction.setTarget(i,j);
 
             ArrayList<ArrayList<Objects>> newMap = map;
@@ -190,6 +192,7 @@ public class ViewController extends AppCompatActivity {
             TextView text = (TextView) findViewById(R.id.editText);
             text.setText("Input from player" + (curentPlayer +1));
             updateMap(map);
+            curentMap = map;
 
             if (curentPlayer >= players.size()){
                 game.setActionList(plActions, this);

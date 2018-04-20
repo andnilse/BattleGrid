@@ -1,5 +1,6 @@
 package com.example.andreas.battlegrid.Model.actions;
 
+import com.example.andreas.battlegrid.Model.objects.Objects;
 import com.example.andreas.battlegrid.Model.objects.Player;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class Actions {
         return targetY;
     }
 
-    public boolean calculateAlowedTargets(Player p, int x, int y){
+    public boolean calculateAlowedTargets(int nextX, int nextY, ArrayList<ArrayList<Objects>> gameMap, Player player){
         return false;
     }
 }

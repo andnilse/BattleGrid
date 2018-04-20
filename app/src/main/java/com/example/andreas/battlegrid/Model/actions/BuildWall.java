@@ -6,7 +6,9 @@ import com.example.andreas.battlegrid.Model.objects.Player;
 import java.util.ArrayList;
 
 public class BuildWall extends Actions{
-    public boolean CalculateAllowedTargets(int nextX, int nextY, ArrayList<ArrayList<Objects>> gameMap, Player player){
+
+    @Override
+    public boolean calculateAlowedTargets(int nextX, int nextY, ArrayList<ArrayList<Objects>> gameMap, Player player){
         int x = player.getX();
         int y = player.getY();
         if (gameMap.get(x).get(y) == null){

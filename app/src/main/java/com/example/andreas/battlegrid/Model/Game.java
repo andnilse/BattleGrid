@@ -11,6 +11,7 @@ import com.example.andreas.battlegrid.Model.objects.Trap;
 import com.example.andreas.battlegrid.Model.objects.Objects;
 import com.example.andreas.battlegrid.Model.objects.Player;
 import com.example.andreas.battlegrid.Model.objects.Wall;
+import com.example.andreas.battlegrid.Model.objects.nothing;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -81,7 +82,7 @@ public class Game implements Serializable{
                     int nextTargetY = action.getTargetY();
 
                     if (action instanceof PlayerMovment){
-                        if (((PlayerMovment) action).CalculateAllowedTargets(nextTargetX, nextTargetY, gameMap, currentPlayer)){
+                        if (((PlayerMovment) action).calculateAlowedTargets(nextTargetX, nextTargetY, gameMap, currentPlayer)){
                             // If the target position does not contain an object (other player or wall)
                             gameMap.remove(currentPlayer);
                             gameMap.get(nextTargetX).add(nextTargetY, currentPlayer);
@@ -106,14 +107,16 @@ public class Game implements Serializable{
                                 Objects object = gameMap.get(nextTargetX).get(nextTargetY);
                                 //Right now the gun takes 1 damage
                                 object.setHealth(object.getHealth()-1);
-                                if (object.getHealth()<=0){
-                                    gameMap.remove(object);
+                                if (object.getHealth()<=0 && !(object instanceof nothing)){
+                                    int[] xy = object.getMapPosition(gameMap);
+                                    gameMap.get(xy[0]).remove(xy[1]);
+                                    gameMap.get(xy[0]).add(xy[1], new nothing());
                                 }
                             }
                         }
 
                     }if (action instanceof BuildWall){
-                        if (((BuildWall) action).CalculateAllowedTargets(nextTargetX,nextTargetY, gameMap, currentPlayer)){
+                        if (((BuildWall) action).calculateAlowedTargets(nextTargetX,nextTargetY, gameMap, currentPlayer)){
                             Wall wall = new Wall();
                             gameMap.get(nextTargetX).set(nextTargetY, wall);
                             wall.setX(nextTargetX);

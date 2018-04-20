@@ -3,6 +3,7 @@ package com.example.andreas.battlegrid;
 import com.example.andreas.battlegrid.Model.Action;
 import com.example.andreas.battlegrid.Model.objects.Objects;
 import com.example.andreas.battlegrid.Model.objects.Player;
+import com.example.andreas.battlegrid.Model.objects.nothing;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class Map implements Serializable {
             ArrayList<Objects> colmn = new ArrayList<Objects>();
 
             for (int j = 0; j<10; j++){
-                colmn.add(null);
+                colmn.add(new nothing());
             }
 
             row.add(colmn);
