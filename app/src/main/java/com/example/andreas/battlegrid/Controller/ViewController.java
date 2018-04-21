@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.andreas.battlegrid.Model.Action;
 import com.example.andreas.battlegrid.Model.Game;
 import com.example.andreas.battlegrid.Model.actions.Actions;
 import com.example.andreas.battlegrid.Model.actions.BuildWall;
@@ -37,8 +38,6 @@ public class ViewController extends AppCompatActivity {
 
     /*
     TODO
-    oppdatere kart når spilere legger til movments
-    resette kart når neste spiller legger til actions
     legge til liste med våpen
     legge til for build og move
 
@@ -51,12 +50,14 @@ public class ViewController extends AppCompatActivity {
         setContentView(R.layout.playerchoise);
 
         game = (Game) getIntent().getSerializableExtra("Game");
-        players = game.playerList;
-        for ( int i =0; i<players.size();i++) {
+        for ( int i =0; i<game.playerList.size();i++) {
             plActions.add(new ArrayList<Actions>());
+            Player p = new Player(game.playerList.get(i).getName(), game.playerList.get(i).getIcon());
+            p.setX(game.playerList.get(i).getX());
+            p.setY(game.playerList.get(i).getY());
+            players.add(p);
         }
-        map = game.gameMap;
-        curentMap = map;
+        map = copymap(game.gameMap);
         actionsPerTurn = 5;
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -152,14 +153,13 @@ public class ViewController extends AppCompatActivity {
 
     Game game;
     ArrayList<ArrayList<Objects>> map;
-    ArrayList<Player> players;
+    ArrayList<Player> players = new ArrayList<>();
     int actionsPerTurn = 5;
 
     int curentPlayer = 0;
     int numberOfCurentInputs = 0;
     ArrayList<ArrayList<Actions>> plActions = new ArrayList<ArrayList<Actions>>();
     Actions curentAction = new Pistol();
-    ArrayList<ArrayList<Objects>> curentMap;
 
     public void MapButtonClick(View v){
         if (!(moveActive || buildActive || weaponActive)){
@@ -169,26 +169,31 @@ public class ViewController extends AppCompatActivity {
         int i = (int) v.getTag(R.string.tagIDx);
         int j = (int) v.getTag(R.string.tagIDy);
 
-        if (curentAction.calculateAlowedTargets(i, j, curentMap, players.get(curentPlayer))){
-            curentAction.setTarget(i,j);
+        if (curentAction.calculateAlowedTargets(i, j, map, players.get(curentPlayer))){
+            Actions act = new PlayerMovment();
+
 
 
             if (curentAction instanceof PlayerMovment){
-                curentMap.get(players.get(curentPlayer).getX()).set(players.get(curentPlayer).getY(), new nothing());
+
+                map.get(players.get(curentPlayer).getX()).set(players.get(curentPlayer).getY(), new nothing());
                 players.get(curentPlayer).setX(i);
                 players.get(curentPlayer).setY(j);
-                curentMap.get(i).set(j, players.get(curentPlayer));
+                map.get(i).set(j, players.get(curentPlayer));
 
             } else if (curentAction instanceof BuildWall){
-                curentMap.get(i).set(j, new Wall());
+                act = new BuildWall();
+                map.get(i).set(j, new Wall());
             } else if (curentAction instanceof MakeTrap){
-                curentMap.get(i).set(j, new Trap());
+                act = new MakeTrap();
+                map.get(i).set(j, new Trap());
             }
-            updateMap(curentMap);
+            act.setTarget(i,j);
+            updateMap(map);
 
 
 
-            plActions.get(curentPlayer).add(curentAction);
+            plActions.get(curentPlayer).add(plActions.get(curentPlayer).size(), act);
             numberOfCurentInputs ++;
         } else {
             Toast.makeText(this, "Tile not allowed for this kind of target", Toast.LENGTH_SHORT).show();
@@ -200,13 +205,13 @@ public class ViewController extends AppCompatActivity {
             numberOfCurentInputs =0;
             TextView text = (TextView) findViewById(R.id.editText);
             text.setText("Input from player" + (curentPlayer +1));
-            //TODO Hente map + players fra game
+
+            map = copymap(game.gameMap);
             updateMap(map);
-            curentMap = map;
+
 
 
             if (curentPlayer >= players.size()){
-                game.setActionList(plActions, this);
 
                 Button move = (Button) findViewById(R.id.ibMovment);
                 move.setEnabled(false);
@@ -219,10 +224,50 @@ public class ViewController extends AppCompatActivity {
                 Button trap = (Button) findViewById(R.id.ibTrap);
                 trap.setEnabled(false);
 
+
+                text.setText("Battle!!!");
+
+                //gjøre klart for animation
+                //TODO -----------------------------------
+                //animation
+
+                ArrayList<ArrayList<ArrayList<Objects>>> maps = game.setActionList(plActions, this);
+                animate(maps);
+
+                if (winner != null){
+                    text.setText("The Winner Is " + winner.getName());
+
+                    /*try {
+                        wait(3500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }*/
+
+                    finish();
+                }
+
+                //TODO -----------------------------------
+                //sette opp for neste runde
+
+                players = new ArrayList<Player>();
+                plActions = new ArrayList<ArrayList<Actions>>();
+                for ( int nyi =0; nyi<game.playerList.size();nyi++) {
+                    plActions.add(new ArrayList<Actions>());
+                    Player p = new Player(game.playerList.get(nyi).getName(), game.playerList.get(nyi).getIcon());
+                    p.setX(game.playerList.get(nyi).getX());
+                    p.setY(game.playerList.get(nyi).getY());
+                    players.add(p);
+                }
+                map = copymap(game.gameMap);
+                curentPlayer = 0;
+                updateMap(map);
+                text.setText("Input from player" + (curentPlayer +1));
+
+                move.setEnabled(true);
+                move(null);
+
             }
         }
-
-        int sdfsdfsdf = 0;
     }
 
     boolean moveActive = false;
@@ -330,19 +375,42 @@ public class ViewController extends AppCompatActivity {
         trap.setEnabled(false);
     }
 
+    Player winner = null;
+    int winnerTurnNr = -1;
+    public void animate(ArrayList<ArrayList<ArrayList<Objects>>> maps){
+        for (int i =0; i<maps.size();i++){
+            if (winnerTurnNr == i && winner != null){
+                Toast.makeText(this, "The Winner Is " + winner.getName(), Toast.LENGTH_LONG).show();
+                break;
+            }
+
+            updateMap(maps.get(i));
+            /*try {
+                wait(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }*/
+        }
+
+    }
+
     public void updateMap (ArrayList<ArrayList<Objects>> newmap){
         for (int i =0; i<gridButtons.size();i++){
-            //gridButtons.get(i).setImageResource(newmap.get(gridButtons.get(i).getTag(R.string.tagIDx)).get(gridButtons.get(i).getTag(R.string.tagIDy)).getIcon());
             gridButtons.get(i).setImageResource(newmap.get((int) gridButtons.get(i).getTag(R.string.tagIDx)).get((int) gridButtons.get(i).getTag(R.string.tagIDy)).getIcon());
         }
     }
 
-    public void receaveMaps (ArrayList<ArrayList<ArrayList<Objects>>> newMap){
-
+    public void receavWinner(Player winner, int turn){
+        this.winner = winner;
+        winnerTurnNr = turn;
     }
 
-    public void receavWinner(Player winner){
-
+    public ArrayList copymap(ArrayList<ArrayList<Objects>> org){
+        ArrayList<ArrayList<Objects>> clone = new ArrayList<ArrayList<Objects>>(org.size());
+        for (ArrayList a : org) {
+            ArrayList<Objects> innerClone = new ArrayList<Objects>(a);
+            clone.add(innerClone);
+        }
+        return clone;
     }
-
 }

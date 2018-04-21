@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * Created by Andreas on 22.02.2018.
  */
 
-public class Objects implements Serializable {
+public class Objects implements Serializable  {
     private int x,y;
     private String name;
     private int health;

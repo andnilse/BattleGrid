@@ -11,11 +11,9 @@ import java.util.ArrayList;
 import java.util.ArrayList;
 
 public class Map implements Serializable {
-    private Map map;
 
     public Map(){
 
-        Objects obj = new Objects();
 
         for (int i = 0; i<10;i++){
             ArrayList<Objects> colmn = new ArrayList<Objects>();
@@ -39,14 +37,6 @@ public class Map implements Serializable {
         row = map;
     }
 
-    public Objects getObj(int i, int j){
-        return row.get(i).get(j);
-    }
-
-    public ArrayList<ArrayList> calculatePosibleTargets(Action a){
 
 
-
-        return null;
-    }
 }
