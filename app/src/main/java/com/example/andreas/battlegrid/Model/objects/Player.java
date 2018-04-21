@@ -13,7 +13,7 @@ public class Player extends Objects {
     private int playerIcon;
 
     public Player(String name, int playerIcon){
-        setHealth(5);//ex 10 health;
+        setHealth(10);//ex 10 health;
         this.setName(name);
         this.playerIcon = playerIcon;
     }
