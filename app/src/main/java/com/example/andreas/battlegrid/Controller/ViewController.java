@@ -229,7 +229,7 @@ public class ViewController extends AppCompatActivity {
                 for (int iii =0; iii<maps.size();iii++){
 
                     waitingmap showmaps = new waitingmap();
-                    showmaps.execute(maps.get(iii));
+                    showmaps.execute(maps.get(iii)); // TODO
                 }
 
                 newRound();
