@@ -17,7 +17,8 @@ public class Gun extends Weapon {
     public Gun(){
         gun = this;
     }
-    public boolean CalculateAllowedTargets(int x, int y, ArrayList<ArrayList<Objects>> gameMap, Player player){
+    @Override
+    public boolean calculateAlowedTargets(int x, int y, ArrayList<ArrayList<Objects>> gameMap, Player player){
         if (gameMap.get(x).get(y) instanceof Objects && gameMap.get(x).get(y)!=player){
             return true;
         }

@@ -38,8 +38,10 @@ public class ViewController extends AppCompatActivity {
 
     /*
     TODO
-    legge til liste med våpen
-    legge til for build og move
+    fikse animationer
+
+
+    fikse main manue
 
      */
 
@@ -162,9 +164,10 @@ public class ViewController extends AppCompatActivity {
     Actions curentAction = new Pistol();
 
     public void MapButtonClick(View v){
-        if (!(moveActive || buildActive || weaponActive)){
+        if (!(moveActive || buildActive || (weaponActive && (gunactive || trapactive)))){
             return;
         }
+        if (curentAction == null){ return; }
 
         int i = (int) v.getTag(R.string.tagIDx);
         int j = (int) v.getTag(R.string.tagIDy);
@@ -187,6 +190,8 @@ public class ViewController extends AppCompatActivity {
             } else if (curentAction instanceof MakeTrap){
                 act = new MakeTrap();
                 map.get(i).set(j, new Trap());
+            } else if (curentAction instanceof Gun){
+                act = new Gun();
             }
             act.setTarget(i,j);
             updateMap(map);
@@ -210,20 +215,18 @@ public class ViewController extends AppCompatActivity {
             updateMap(map);
 
 
+            Button move = (Button) findViewById(R.id.ibMovment);
+            move.setEnabled(false);
+            Button build = (Button) findViewById(R.id.ibBuild);
+            build.setEnabled(false);
+            Button shoot = (Button) findViewById(R.id.ibWeapon);
+            shoot.setEnabled(false);
+            Button gun = (Button) findViewById(R.id.ibGun);
+            gun.setEnabled(false);
+            Button trap = (Button) findViewById(R.id.ibTrap);
+            trap.setEnabled(false);
 
             if (curentPlayer >= players.size()){
-
-                Button move = (Button) findViewById(R.id.ibMovment);
-                move.setEnabled(false);
-                Button build = (Button) findViewById(R.id.ibBuild);
-                build.setEnabled(false);
-                Button shoot = (Button) findViewById(R.id.ibWeapon);
-                shoot.setEnabled(false);
-                Button gun = (Button) findViewById(R.id.ibGun);
-                gun.setEnabled(false);
-                Button trap = (Button) findViewById(R.id.ibTrap);
-                trap.setEnabled(false);
-
 
                 text.setText("Battle!!!");
 
@@ -263,10 +266,11 @@ public class ViewController extends AppCompatActivity {
                 updateMap(map);
                 text.setText("Input from player" + (curentPlayer +1));
 
-                move.setEnabled(true);
-                move(null);
 
             }
+
+            move.setEnabled(true);
+            move(null);
         }
     }
 
@@ -335,10 +339,10 @@ public class ViewController extends AppCompatActivity {
             build.setEnabled(false);
 
             weaponActive = true;
-            curentAction = weapon;
+            curentAction = null;
 
             Button gun = (Button) findViewById(R.id.ibGun);
-            gun.setEnabled(false);
+            gun.setEnabled(true);
             Button trap = (Button) findViewById(R.id.ibTrap);
             trap.setEnabled(true);
         } else {
@@ -347,6 +351,8 @@ public class ViewController extends AppCompatActivity {
             gun.setEnabled(false);
             Button trap = (Button) findViewById(R.id.ibTrap);
             trap.setEnabled(false);
+            gunactive = false;
+            trapactive = false;
 
             move.setEnabled(true);
             build.setEnabled(true);
@@ -357,22 +363,33 @@ public class ViewController extends AppCompatActivity {
 
     }
 
+    boolean gunactive = false;
     public void gun(View v){
-        weapon = new Gun();
-        curentAction = weapon;
-        Button gun = (Button) findViewById(R.id.ibGun);
-        gun.setEnabled(false);
         Button trap = (Button) findViewById(R.id.ibTrap);
-        trap.setEnabled(true);
+        if (!gunactive){
+            trap.setEnabled(false);
+            gunactive = true;
+            curentAction = new Gun();
+        } else {
+            trap.setEnabled(true);
+            gunactive = false;
+            curentAction = null;
+        }
+
     }
 
+    boolean trapactive = false;
     public void trap(View v){
-        weapon = new MakeTrap();
-        curentAction = weapon;
         Button gun = (Button) findViewById(R.id.ibGun);
-        gun.setEnabled(true);
-        Button trap = (Button) findViewById(R.id.ibTrap);
-        trap.setEnabled(false);
+        if (!trapactive){
+            gun.setEnabled(false);
+            trapactive = true;
+            curentAction = new MakeTrap();
+        } else {
+            gun.setEnabled(true);
+            trapactive = false;
+            curentAction = null;
+        }
     }
 
     Player winner = null;

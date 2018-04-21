@@ -4,6 +4,7 @@ import com.example.andreas.battlegrid.Controller.ViewController;
 import com.example.andreas.battlegrid.Map;
 import com.example.andreas.battlegrid.Model.actions.Actions;
 import com.example.andreas.battlegrid.Model.actions.BuildWall;
+import com.example.andreas.battlegrid.Model.actions.MakeTrap;
 import com.example.andreas.battlegrid.Model.actions.PlayerMovment;
 import com.example.andreas.battlegrid.Model.actions.Weapon;
 import com.example.andreas.battlegrid.Model.actions.weapons.Gun;
@@ -107,15 +108,50 @@ public class Game implements Serializable{
                     //Else dont move and write to log??
                 } else if (action instanceof Weapon){
                     if (action instanceof Gun){
-                        if (((Gun) action).CalculateAllowedTargets(nextTargetX, nextTargetY, gameMap, currentPlayer)){
-                            Objects object = gameMap.get(nextTargetX).get(nextTargetY);
-                            //Right now the gun takes 1 damage
-                            object.setHealth(object.getHealth()-1);
-                            if (object.getHealth()<=0 && !(object instanceof nothing)){
-                                int[] xy = object.getMapPosition(gameMap);
-                                gameMap.get(xy[0]).remove(xy[1]);
-                                gameMap.get(xy[0]).add(xy[1], new nothing());
+                        if (((Gun) action).calculateAlowedTargets(nextTargetX, nextTargetY, gameMap, currentPlayer)){
+
+                            int xMod = 0;
+                            int yMod = 0;
+                            if (currentPlayer.getX()-nextTargetX <0){ xMod = 1; } else { xMod = -1; }
+                            if (currentPlayer.getY()-nextTargetY <0){ yMod = 1; } else { yMod = -1; }
+
+                            double angle = Math.hypot(currentPlayer.getX()-nextTargetX, currentPlayer.getY()-nextTargetY);
+                            int tilex = currentPlayer.getX();
+                            int tiley = currentPlayer.getY();
+
+                            boolean bulletHit = false;
+                            while (!bulletHit){
+
+                                double xang = Math.hypot(tilex+xMod-nextTargetX, tiley-nextTargetY);
+                                double yang = Math.hypot(tilex-nextTargetX, tiley+yMod-nextTargetY);
+
+                                //if (angle<xang){xang = xang-angle;} else { xang = angle-xang; }
+                                //if (angle<yang){yang = yang-angle;} else { yang = angle-yang; }
+
+
+                                if (xang<yang) {
+                                    tilex += xMod;
+                                } else {
+                                    tiley +=yMod;
+                                }
+
+                                if (tilex >9 || tiley>9 || tilex <0 || tiley<0){ break; }
+
+                                if (gameMap.get(tilex).get(tiley) instanceof Wall || gameMap.get(tilex).get(tiley) instanceof Player){
+                                    bulletHit = true;
+                                    gameMap.get(tilex).get(tiley).setHealth(gameMap.get(tilex).get(tiley).getHealth()-1);
+
+                                    gameMap.get(tilex).set(tiley, new nothing());
+                                }
                             }
+                        }
+                    } else if (action instanceof MakeTrap){
+                        if (((MakeTrap) action).calculateAlowedTargets(nextTargetX, nextTargetY, gameMap, currentPlayer)){
+                            Trap t = new Trap();
+                            gameMap.get(nextTargetX).set(nextTargetY, t);
+                            t.setX(nextTargetX);
+                            t.setY(nextTargetY);
+
                         }
                     }
 
