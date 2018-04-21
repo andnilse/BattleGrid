@@ -1,27 +1,22 @@
 package com.example.andreas.battlegrid.Controller;
 
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.andreas.battlegrid.Model.Action;
 import com.example.andreas.battlegrid.Model.Game;
 import com.example.andreas.battlegrid.Model.actions.Actions;
 import com.example.andreas.battlegrid.Model.actions.BuildWall;
 import com.example.andreas.battlegrid.Model.actions.PlayerMovment;
-import com.example.andreas.battlegrid.Model.actions.Weapon;
 import com.example.andreas.battlegrid.Model.actions.weapons.Gun;
 import com.example.andreas.battlegrid.Model.actions.MakeTrap;
 import com.example.andreas.battlegrid.Model.actions.weapons.Pistol;
@@ -230,47 +225,28 @@ public class ViewController extends AppCompatActivity {
 
                 text.setText("Battle!!!");
 
-                //gjøre klart for animation
-                //TODO -----------------------------------
-                //animation
-
                 ArrayList<ArrayList<ArrayList<Objects>>> maps = game.setActionList(plActions, this);
-                animate(maps);
+                for (int iii =0; iii<maps.size();iii++){
 
-                if (winner != null){
-                    text.setText("The Winner Is " + winner.getName());
-
-                    /*try {
-                        wait(3500);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }*/
-
-                    finish();
+                    waitingmap showmaps = new waitingmap();
+                    showmaps.execute(maps.get(iii));
                 }
 
-                //TODO -----------------------------------
-                //sette opp for neste runde
+                newRound();
 
-                players = new ArrayList<Player>();
-                plActions = new ArrayList<ArrayList<Actions>>();
-                for ( int nyi =0; nyi<game.playerList.size();nyi++) {
-                    plActions.add(new ArrayList<Actions>());
-                    Player p = new Player(game.playerList.get(nyi).getName(), game.playerList.get(nyi).getIcon());
-                    p.setX(game.playerList.get(nyi).getX());
-                    p.setY(game.playerList.get(nyi).getY());
-                    players.add(p);
-                }
-                map = copymap(game.gameMap);
-                curentPlayer = 0;
-                updateMap(map);
-                text.setText("Input from player" + (curentPlayer +1));
+
+
+
 
 
             }
 
             move.setEnabled(true);
-            move(null);
+            build.setEnabled(true);
+            shoot.setEnabled(true);
+            moveActive = false;
+            weaponActive = false;
+            buildActive = false;
         }
     }
 
@@ -393,24 +369,6 @@ public class ViewController extends AppCompatActivity {
     }
 
     Player winner = null;
-    int winnerTurnNr = -1;
-    public void animate(ArrayList<ArrayList<ArrayList<Objects>>> maps){
-        for (int i =0; i<maps.size();i++){
-            if (winnerTurnNr == i && winner != null){
-                Toast.makeText(this, "The Winner Is " + winner.getName(), Toast.LENGTH_LONG).show();
-                break;
-            }
-
-            updateMap(maps.get(i));
-            /*try {
-                wait(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }*/
-        }
-
-    }
-
     public void updateMap (ArrayList<ArrayList<Objects>> newmap){
         for (int i =0; i<gridButtons.size();i++){
             gridButtons.get(i).setImageResource(newmap.get((int) gridButtons.get(i).getTag(R.string.tagIDx)).get((int) gridButtons.get(i).getTag(R.string.tagIDy)).getIcon());
@@ -419,7 +377,6 @@ public class ViewController extends AppCompatActivity {
 
     public void receavWinner(Player winner, int turn){
         this.winner = winner;
-        winnerTurnNr = turn;
     }
 
     public ArrayList copymap(ArrayList<ArrayList<Objects>> org){
@@ -429,5 +386,78 @@ public class ViewController extends AppCompatActivity {
             clone.add(innerClone);
         }
         return clone;
+    }
+
+    public void newRound(){
+        TextView text = (TextView) findViewById(R.id.editText);
+        if (winner != null){
+            waitingWinn showmaps = new waitingWinn();
+            showmaps.execute("");
+        } else {
+            players = new ArrayList<Player>();
+            plActions = new ArrayList<ArrayList<Actions>>();
+            for ( int nyi =0; nyi<game.playerList.size();nyi++) {
+                plActions.add(new ArrayList<Actions>());
+                Player p = new Player(game.playerList.get(nyi).getName(), game.playerList.get(nyi).getIcon());
+                p.setX(game.playerList.get(nyi).getX());
+                p.setY(game.playerList.get(nyi).getY());
+                players.add(p);
+            }
+            map = copymap(game.gameMap);
+            curentPlayer = 0;
+            updateMap(map);
+            text.setText("Input from player" + (curentPlayer +1));
+        }
+    }
+
+    public void finnish(){
+        TextView text = (TextView) findViewById(R.id.editText);
+        text.setText("The Winner Is " + winner.getName());
+
+        finish();
+    }
+
+
+
+
+
+
+    private class waitingmap extends AsyncTask<ArrayList<ArrayList<Objects>>, ArrayList<ArrayList<Objects>>, ArrayList<ArrayList<Objects>>[]> {
+
+        @Override
+        protected ArrayList<ArrayList<Objects>>[] doInBackground(ArrayList<ArrayList<Objects>>... arrayLists) {
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return arrayLists;
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<ArrayList<Objects>>... result) {
+            updateMap(result[0]);
+        }
+    }
+
+    private class waitingWinn extends AsyncTask<String, String, String> {
+
+
+
+        @Override
+        protected String doInBackground(String... strings) {
+            try {
+                Thread.sleep(4000);
+
+            }
+            catch (Exception e) {                }
+            return "COMPLETE!";
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            finnish();
+            super.onPostExecute(result);
+        }
     }
 }
